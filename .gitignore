@@ -13,5 +13,4 @@ algorithms/__pycache__/branch_and_bound.cpython-311.pyc
 __pycache__/preprocessor.cpython-311.pyc
 statistics.csv
 dataset_adapted.txt
-statistics/chris_stats_memory.csv
-statistics/twice_stats_memory.csv
+*.csv#
