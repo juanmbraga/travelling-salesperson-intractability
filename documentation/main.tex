@@ -131,22 +131,32 @@ matching on the odd-degree vertices remains the bottleneck of the algorithm.
 \subsection{Implementation Choices}
 
 The programming language used was Python 3.12, and the program was executed 
-in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution. The datasets 
-were selected by the professor from the TSPLIB \cite{datasets_lib}.
+in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a computer with a 
+Intel Core i5-4690K processor and 8GB of RAM at 2133MHz.
 
-The chosen data structure for the approximate algorithms was the graph implementation 
+The \textbf{datasets} were selected by the professor from the TSPLIB \cite{datasets_lib}. They are 
+composed of \texttt{.tsp} files with the node key and its $x$ and $y$ location in the carthesian plane. 
+The graphs are to be constructed by considering that all cities are connected to all other cities, forming 
+a totally connected graph.
+
+The chosen \textbf{data structure} for the approximate algorithms was the graph implementation 
 by the \texttt{networkx} library in python \cite{networkx_docs}, as recommended by 
 the professor in the project specifications. To prevent excessive use of Python loops, 
-the internal \texttt{networkx} functions were used, such as \texttt{minimum\_spanning\_tree} , 
+the internal \texttt{networkx} functions were also used, such as \texttt{minimum\_spanning\_tree} , 
 \texttt{eulerian\_circuit} and \texttt{min\_weight\_matching}.
 
-For keeping track of time and allocated memory, the libraries \texttt{time} and 
-\texttt{memory\_profiler} were chosen, as they provided the most convenient interface.
+The \textbf{libraries} \texttt{time} and \texttt{memory\_profiler} were chosen to keep track of time 
+and allocated memory, as they provided the most convenient interface. It must be noted that the library 
+to monitor the memory gives a significant increase in memory use, so the implementation allowed for 
+two executions: one for testing time and performance and another to keep track of the memory.
 
-[TODO EXEC INSTRUCTIONS]
-[TODO NUMBER OF EDGES]
-[TODO MEMORY AVAILABLE]
-[SKIPPING MEMORY ALLOCATION]
+\textbf{Execution Instructions:}
+- Make sure that a compatible Python version and the libraries used (See above) are installed.
+- Select the desired datasets to be used in the \texttt{dataset_schema.txt} file.
+- Make sure the respecive dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
+- Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file.
+- Run the code in a terminal with the following command: \texttt{python main.py} or \texttt{python3 main.py}.
+- The results will be located on a file called \texttt{statistics.csv}.
 
 \section{Experiments} \label{sec:firstpage}
     Apresentar os experimentos e discutir os resultados. Você deve avaliar os
