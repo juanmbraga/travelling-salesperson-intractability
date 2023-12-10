@@ -140,7 +140,7 @@ The programming language used was Python 3.12, and the program was executed
 in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a computer with a 
 Intel Core i5-4690K processor and 8GB of RAM at 2133MHz.
 
-The \textbf{datasets} were selected by the professor from the TSPLIB \cite{datasets_lib}. They are 
+The \textbf{datasets} were selected by the professor from the TSPLIB \cite{dataset_lib}. They are 
 composed of \texttt{.tsp} files with the node key and its $x$ and $y$ location in the carthesian plane. 
 The graphs are to be constructed by considering that all cities are connected to all other cities, forming 
 a totally connected graph.
@@ -178,7 +178,7 @@ to find the solution, the amount of memory used and the quality of the solutions
 compared to the optimal solution (see Section~\ref{sec:implementation} for information 
 on libraries used).
 
-\subsecion{Memory Use} \label{sec:exp_memory}
+\subsection{Memory Use} \label{sec:exp_memory}
 
 The first and most important aspect when dealing with exponential optimisation algorithms such as 
 the TSP is the use of memory. In order to make informed decisions about all possible combinations, 
@@ -212,7 +212,7 @@ the available RAM capacity (See Section~\ref{sec:implementation} for details) an
 \footnote{Swap or Page file is a section of a hard drive used as a temporary location to store information 
 when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
 compared with the primary memory.} 
-file was triggered. This can be seen in Figure~\ref{fig:memory\_behaviour} (a).
+file was triggered. This can be seen in Figure~\ref{fig:memory_behaviour} (a).
 
 Secondly, from the \texttt{rl11849} dataset onward the computer did not have enough memory and swap to 
 even build the graph in the executions without memory monitoring. As the use of the memory\_profiler gives us 
@@ -220,7 +220,7 @@ a significantly larger memory footprint, executing the smaller \texttt{rl5915} a
 was also not possible.
 
 And finally, the Twice-around-the-tree algorithm displayed a much more "explosive" use of 
-memory, while the Christofides, once built, remained fairly constant. See Figure~\ref{fig:memory\_behaviour} (a) and (b).
+memory, while the Christofides, once built, remained fairly constant. See Figure~\ref{fig:memory_behaviour} (a) and (b).
 
 \subsection{Solution Quality} \label{sec:exp_quality}
 
