@@ -44,7 +44,7 @@
 
 \section{Introducing the Travelling Salesperson Problem}
 
-The Travelling Salesperson Problem (TSP) is aptly described by [BRILLIANT] 
+The Travelling Salesperson Problem (TSP) is aptly described by \cite{brilliant_explanation} 
 
 \begin{quote}
   "A salesperson needs to visit a set of cities to sell their goods. They know how 
@@ -99,9 +99,9 @@ focusing on the most promising paths.
 \subsection{Approximate Solution: Christofides}
 
 The Christofides algorithm was built by leveraging a key insight: many of the edges on the 
-optimal solution are often found on the Minimmum Spanning Tree (MST) of the same graph. Therefore, 
-as there are known relativelly efficient algorithms for generating the MST, it makes 
-sense to try and make use of this fact.
+optimal solution are often found on the Minimmum Spanning Tree (MST) of the same graph 
+\footnote{\cite{reducible_explanation}}. Therefore, as there are known relativelly efficient 
+algorithms for generating the MST, it makes sense to try and make use of this fact.
 
 To form an optimal solution, all nodes of the MST should have an even number of edges, so 
 that the salesperson could enter and leave the city through exactly two edges (also known as an 
@@ -118,7 +118,7 @@ Combining the MST with the minimum-length matching will provide us with a very g
 approximation of the TSP's optimal solution, which can be easily constructed by
 traversing this graph while taking shortcuts to avoid visiting multiple cities.
 
-According to [TODO CITE ARTICLE], the Christofides algorithm provides a better 
+According to \cite{Johnson2003}, the Christofides algorithm provides a better 
 worst-case guarantee than any other currently known tour construction heuristic: a worst case ratio of 1.5; 
 [and] it also tends to find better tours in practice. However, [C]omputing the minimum-length 
 matching on the odd-degree vertices remains the bottleneck of the algorithm.
@@ -131,16 +131,32 @@ matching on the odd-degree vertices remains the bottleneck of the algorithm.
 \subsection{Implementation Choices}
 
 The programming language used was Python 3.12, and the program was executed 
-in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution.
+in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a computer with a 
+Intel Core i5-4690K processor and 8GB of RAM at 2133MHz.
 
-The chosen data structure for the approximate algorithms was the graph implementation 
-by the \texttt{networkx} library in python [TODO CITE NETWORKX], as recommended by 
+The \textbf{datasets} were selected by the professor from the TSPLIB \cite{datasets_lib}. They are 
+composed of \texttt{.tsp} files with the node key and its $x$ and $y$ location in the carthesian plane. 
+The graphs are to be constructed by considering that all cities are connected to all other cities, forming 
+a totally connected graph.
+
+The chosen \textbf{data structure} for the approximate algorithms was the graph implementation 
+by the \texttt{networkx} library in python \cite{networkx_docs}, as recommended by 
 the professor in the project specifications. To prevent excessive use of Python loops, 
-the internal \texttt{networkx} functions were used, such as \texttt{minimum\_spanning\_tree} , 
+the internal \texttt{networkx} functions were also used, such as \texttt{minimum\_spanning\_tree} , 
 \texttt{eulerian\_circuit} and \texttt{min\_weight\_matching}.
 
-For keeping track of time and allocated memory, the libraries \texttt{time} and 
-\texttt{memory\_profiler} were chosen, as they provided the most convenient interface.
+The \textbf{libraries} \texttt{time} and \texttt{memory\_profiler} were chosen to keep track of time 
+and allocated memory, as they provided the most convenient interface. It must be noted that the library 
+to monitor the memory gives a significant increase in memory use, so the implementation allowed for 
+two executions: one for testing time and performance and another to keep track of the memory.
+
+\textbf{Execution Instructions:}
+- Make sure that a compatible Python version and the libraries used (See above) are installed.
+- Select the desired datasets to be used in the \texttt{dataset_schema.txt} file.
+- Make sure the respecive dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
+- Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file.
+- Run the code in a terminal with the following command: \texttt{python main.py} or \texttt{python3 main.py}.
+- The results will be located on a file called \texttt{statistics.csv}.
 
 \section{Experiments} \label{sec:firstpage}
     Apresentar os experimentos e discutir os resultados. Você deve avaliar os
@@ -154,16 +170,17 @@ to find the solution, the amount of memory used and the quality of the solutions
 compared to the optimal solution (see [TODO SECTION IMPLEMENTATION CITE] for information 
 on libraries used).
 
-\subsection{Execution Time}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[height=.325\textheight]{execution_time_comparison.png}
-\caption{Chart comparing the time elapsed between the Christofides and the Twice-around-the-tree algorithms.}
-\label{fig:exec_time}
-\end{figure}
-
 \subsecion{Memory Use}
+
+The first and most important aspect when dealing with exponential optimisation algorithms such as 
+the TSP is the use of memory. In order to make informed decisions about all possible combinations, 
+it is often necessary to store information about many or all of the previous decisions, not to 
+mention storing the entire problem.
+
+For this project, the chosen data structure implementation (See [TODO REFERENCE]) works by storing 
+the entire graph in memory, so simply storing the dataset is the first memory bottleneck.
+
+For the 
 
 \begin{figure}[ht]
 \centering
@@ -172,7 +189,22 @@ on libraries used).
 \label{fig:mem_use}
 \end{figure}
 
+starting with the datasets with 3795 cities (fl3795) for the Christofides algorithm, 
+and with [TODO NUMBER] cities ([TODO DATASET]) for the Twice-around-the-tree, the the allocated memory did surpass 
+the available RAM capacity ([TODO REFERENCE SECTION WITH MEMORY]) and storage in the \texttt{swap}/\texttt{paging} 
+file 
+\footnote{Swap or Page file is a section of a hard drive used as a temporary location to store information 
+when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
+compared with the primary memory.} 
+was triggered.
+
+Datasets starting with [TODO] cities for the Twice-around-the-tree and with [TODO] for the Christofides were 
+not even able to be stored in the available memory and caused the computer to crash.
+
+
 \subsection{Solution Quality}
+
+The graph of the Figure~\ref{fig:quality_ratio} shows the ratio \frac{Approximate Solution}{Optimial Solution}.
 
 \begin{figure}[ht]
 \centering
@@ -181,19 +213,33 @@ on libraries used).
 \label{fig:quality_ratio}
 \end{figure}
 
+The Twice-around-the-tree stays consistently below the expected theoretical worst case ([TODO SEE SECTION]) of 
+twice the optimal solution, and the Christofides solutions find paths that are consistently better and closer to it, 
+also keeping the tight 1.5 quality ratio.
+
+\subsection{Execution Time}
+
+The execution time of the algorithms can be compared with the following Figure~\ref{fig:exec_time}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[height=.325\textheight]{execution_time_comparison.png}
+\caption{Chart comparing the time elapsed between the Christofides and the Twice-around-the-tree algorithms.}
+\label{fig:exec_time}
+\end{figure}
+
+The Christofides algorithm takes significantly longer to run when compared to the Twice-arount-the-tree. 
+In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
+has diagnosed that the algorithms exceeded the available RAM memory (See [TODO SECTION]), and therefore 
+the graph does not display their ideal behviour (suffering from the slow speeds of the swap/paging memory).
+
+The use of the \texttt{swap} therefore indicates that the time data does not perfectly represent the ideal behaviour 
+of the algorithms, and perfectly illustrates how difficult it is to optimise exponential algorithms for relatively 
+small cases. [TODO REFER SECTION ON MEMORY]
+
 \section{Conclusions}
     Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
     com seus experimentos.
-
-\section{References}
-
-https://brilliant.org/wiki/traveling-salesperson-problem/
-https://www.cs.ubc.ca/~hutter/previous-earg/EmpAlgReadingGroup/TSP-JohMcg97.pdf (Page 9, 2.2)
-https://www.youtube.com/watch?v=GiDsjIBOVoA
-http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
-https://www.overleaf.com/latex/templates/sbc-conferences-template/blbxwjwzdngr
-https://www.youtube.com/watch?v=dNCwtFJLsKI&pp=ygUmY2hpc3RvZmlkZXMgYWxnb3JodG0gc2F1Y2VsZXNzZ2l1c2VwcGU%3D
-https://networkx.github.io/documentation/latest/index.html
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
