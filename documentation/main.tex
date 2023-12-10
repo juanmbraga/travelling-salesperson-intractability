@@ -63,7 +63,7 @@ focusing on evaluating the real-world challenges associated with them, such as p
 optimization, making informed decisions on data structures and libraries, and 
 analyzing the usage of computer resources.
 
-\section{Modelling and Implementation} \label{sec:model}
+\section{Algorithms} \label{sec:algorithms}
 
 The TSP problem can be conveniently modeled by a weighted graph, with the graph's 
 nodes representing the cities and the edge weights specifying the distances.
@@ -96,6 +96,12 @@ focusing on the most promising paths.
 
 [TODO START COST ESTIMATE]
 
+The branch-and-bound technique has a \textbf{Worst-case} time complexity of $O(n!)$, 
+where $n$ is the number of cities, because it may need to explore all possible permutations. 
+However, effective bounding can significantly reduce the number of examined permutations, 
+making it more efficient than a naive brute-force approach. The actual performance depends on 
+the specific instance of the problem and the bounding technique used.
+
 \subsection{Approximate Solution: Christofides} \label{sec:chris_explanation}
 
 The Christofides algorithm was built by leveraging a key insight: many of the edges on the 
@@ -119,8 +125,8 @@ approximation of the TSP's optimal solution, which can be easily constructed by
 traversing this graph while taking shortcuts to avoid visiting multiple cities.
 
 According to \cite{Johnson2003}, the Christofides algorithm provides a better 
-worst-case guarantee than any other currently known tour construction heuristic: a worst case ratio of 1.5; 
-[and] it also tends to find better tours in practice. However, [C]omputing the minimum-length 
+\textbf{worst-case} guarantee than any other currently known tour construction heuristic: a worst case ratio of 1.5; 
+[and] it also tends to find better tours in practice. However, [c]omputing the minimum-length 
 matching on the odd-degree vertices remains the bottleneck of the algorithm.
 
 \subsection{Approximate Solution: Twice Around the Tree} \label{sec:twice_explanation}
@@ -128,7 +134,7 @@ matching on the odd-degree vertices remains the bottleneck of the algorithm.
 [TODO DESCRIPTION OF TWICE-AROUND-THE-TREE]
 [guarantee of 2 of optimal solution]
 
-\subsection{Implementation Choices} \label{sec:implementation}
+\section{Implementation Choices and Execution Instructions} \label{sec:implementation}
 
 The programming language used was Python 3.12, and the program was executed 
 in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a computer with a 
@@ -167,7 +173,7 @@ two executions: one for testing time and performance and another to keep track o
 
 The qualities of each algorithm will be evaluated through four metrics: the time elapsed 
 to find the solution, the amount of memory used and the quality of the solutions found 
-compared to the optimal solution (see [TODO SECTION IMPLEMENTATION CITE] for information 
+compared to the optimal solution (see Section~\ref{sec:implementation} for information 
 on libraries used).
 
 \subsecion{Memory Use} \label{sec:exp_memory}
@@ -177,10 +183,10 @@ the TSP is the use of memory. In order to make informed decisions about all poss
 it is often necessary to store information about many or all of the previous decisions, not to 
 mention storing the entire problem.
 
-For this project, the chosen data structure implementation (See [TODO REFERENCE]) works by storing 
+For this project, the chosen data structure implementation (See Section~\ref{sec:implementation}) works by storing 
 the entire graph in memory, so simply storing the dataset is the first memory bottleneck.
 
-For the 
+For the algorithms themselves, see the allocated memory for each test case in Figure~\ref{fig:mem_use}.
 
 \begin{figure}[ht]
 \centering
@@ -189,20 +195,31 @@ For the
 \label{fig:mem_use}
 \end{figure}
 
-construction: 5915 chris, X twice
-total: X chris, 5934 twice
-starting with the datasets with 5915 cities (rl5915) for the Christofides algorithm, 
-and with 4461 cities (fnl4461) for the Twice-around-the-tree, the the allocated memory did surpass 
-the available RAM capacity ([TODO REFERENCE SECTION WITH MEMORY]) and storage in the \texttt{swap}/\texttt{paging} 
+The graph displays a similar memory footprint for both algorithms. However, to put things in perspective, 
+see the following Figure~\ref{fig:mem_use} 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[height=.325\textheight]{memory_behaviour.png}
+\caption{(a) Graph showing memory use for the Twice-around-the-tree algorithm. (b) Graph showing memory use for the Christofides algorithm.}
+\label{fig:memory_behaviour}
+\end{figure}
+
+The first thing that must be noted it that for each algorithm there was a dataset where the allocated memory surpassed 
+the available RAM capacity (See Section~\ref{sec:implementation} for details) and storage in the \texttt{swap}/\texttt{paging} 
 file 
 \footnote{Swap or Page file is a section of a hard drive used as a temporary location to store information 
 when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
 compared with the primary memory.} 
-was triggered.
+was triggered. This can be seen in Figure~\ref{fig:memory_behaviour} (a).
 
-Datasets starting with [TODO] cities for the Twice-around-the-tree and with [TODO] for the Christofides were 
-not even able to be stored in the available memory and caused the computer to crash.
+Secondly, from the \texttt{rl11849} dataset onward the computer did not have enough memory and swap to 
+even build the graph in the executions without memory monitoring. As the use of the memory_profiler gives us 
+a significantly larger memory footprint, executing the smaller \texttt{rl5915} and \texttt{rl5934} datasets 
+was also not possible.
 
+And finally, the Twice-around-the-tree algorithm displayed a much more "explosive" use of 
+memory, while the Christofides, once built, remained fairly constant. See Figure~\ref{fig:memory_behaviour} (a) and (b).
 
 \subsection{Solution Quality} \label{sec:exp_quality}
 
@@ -215,7 +232,7 @@ The graph of the Figure~\ref{fig:quality_ratio} shows the ratio \frac{Approximat
 \label{fig:quality_ratio}
 \end{figure}
 
-The Twice-around-the-tree stays consistently below the expected theoretical worst case ([TODO SEE SECTION]) of 
+The Twice-around-the-tree stays consistently below the expected theoretical worst case (Section~\ref{sec:twice_explanation}) of 
 twice the optimal solution, and the Christofides solutions find paths that are consistently better and closer to it, 
 also keeping the tight 1.5 quality ratio.
 
