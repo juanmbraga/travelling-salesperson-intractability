@@ -14,3 +14,4 @@ __pycache__/preprocessor.cpython-311.pyc
 statistics.csv
 dataset_adapted.txt
 *.csv#
+*.xlsx
