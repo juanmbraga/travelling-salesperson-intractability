@@ -3,13 +3,13 @@ import networkx as nx
 
 def solve(graph):
     """
-    Calculates the solution for the Travelling Salesperson Problem (or also the Hamiltonian circuit) and total weight of a given graph using the Twice Around the Tree algorithm.
+    Solves the Travelling Salesperson Problem using the Twice Around the Tree algorithm.
 
     Parameters:
     graph (networkx.Graph): The input graph.
 
     Returns:
-    tuple: A tuple containing the Hamiltonian circuit (list of edges) and the total weight (sum of edge weights) of the circuit.
+    tuple: A tuple containing the Hamiltonian circuit and it's total distance/weight.
     """
 
     # Create a minimum spanning tree
