@@ -1,17 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% How to use writeLaTeX: 
-%
-% You edit the source code here on the left, and the preview on the
-% right shows you the result within a few seconds.
-%
-% Bookmark this page and share the URL with your co-authors. They can
-% edit at the same time!
-%
-% You can upload figures, bibliographies, custom classes and
-% styles using the files menu.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
@@ -72,105 +58,74 @@ algorithms means that the time and/or space required to solve the problem grows
 exponentially with the size of the input, making it impractical to solve even for 
 relatively small inputs.
 
-This project documents the development of three solutions for the given problem: 
-branch-and-bound, twice-around-the-tree, and Christofides algorithms. It focuses 
-on evaluating the real-world challenges associated with them, such as planning and 
-optimizing them, making informed decisions on data structures and libraries, and 
-analyzing the use of resources.
+This project documents the development of three solutions for the given problem, 
+focusing on evaluating the real-world challenges associated with them, such as planning and 
+optimization, making informed decisions on data structures and libraries, and 
+analyzing the usage of computer resources.
 
-\section{First Page} \label{sec:firstpage}
+\section{Modelling and Implementation} \label{sec:firstpage}
+    Descreve as implementações utilizadas. Deve-se apresentar com detalhes a
+    escolha da estimativa de custo; estruturas de dados usadas e o porquê; escolha
+    de best-first ou depth-first no algoritmo de branch-and-bound; além de
+    qualquer outro detalhe de implementação e dos algoritmos em si.
 
-The first page must display the paper title, the name and address of the
-authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
-required only for papers written in Portuguese). The title must be centered
-over the whole page, in 16 point boldface font and with 12 points of space
-before itself. Author names must be centered in 12 point font, bold, all of
-them disposed in the same line, separated by commas and with 12 points of
-space after the title. Addresses must be centered in 12 point font, also with
-12 points of space after the authors' names. E-mail addresses should be
-written using font Courier New, 10 point nominal size, with 6 points of space
-before and 6 points of space after.
+The TSP problem can be conveniently modeled by a weighted graph, with the graph's 
+nodes representing the cities and the edge weights specifying the distances.
 
-The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
-indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
-should be written in boldface and must precede the text.
+To solve it, three algorithms were implemented in this project: an optimal solution using 
+the branch-and-bound technique, and two approximations, the twice-around-the-tree and the 
+Christofides algorithms.
 
-\section{CD-ROMs and Printed Proceedings}
+\subsection{Optimal Solution}
 
-In some conferences, the papers are published on CD-ROM while only the
-abstract is published in the printed Proceedings. In this case, authors are
-invited to prepare two final versions of the paper. One, complete, to be
-published on the CD and the other, containing only the first page, with
-abstract and ``resumo'' (for papers in Portuguese).
+Branch and bound is a general method that tries to divide a problem into smaller subproblems,
+and then makes informed decisions to discard some of these subproblems to reach the optimal solution.
 
-\section{Sections and Paragraphs}
+To consider it in the TSP context, one benefits from picturing the problem as a tree, where each node 
+represents a city and each edge a path between two cities. Then, the first node can be any city 
+(since one can start from any city of the optimal path), and the branch and bound must make the decision 
+of which city to visit next based on all o the previous decisions (cities visited).
 
-Section titles must be in boldface, 13pt, flush left. There should be an extra
-12 pt of space before each title. Section numbering is optional. The first
-paragraph of each section should not be indented, while the first lines of
-subsequent paragraphs should be indented by 1.27 cm.
+The parameter for selecting the next city is calculated by summing the distance of the current path 
+with the minimum distance to any unvisited city. By maintaining a lower bound on the distance of 
+the optimal solution, the branch and bound algorithm discards subproblems that cannot possibly 
+lead to the optimal solution, effectively focusing on promising paths.
 
-\subsection{Subsections}
+\subsection{Approximate Solution: Twice Around the Tree}
 
-The subsection titles must be in boldface, 12pt, flush left.
+[TODO DESCRIPTION OF TWICE-AROUND-THE-TREE]
+[guarantee of 2 of optimal solution]
 
-\section{Figures and Captions}\label{sec:figs}
+\subsection{Approximate Solution: Christofides}
 
+[TODO DESCRIPTION OF CHRISTOFIDES]
+[guarantee of 3/2 of optimal solution]
 
-Figure and table captions should be centered if less than one line
-(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
-both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
-be Helvetica, 10 point, boldface, with 6 points of space before and after each
-caption.
+\section{Experiments} \label{sec:firstpage}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
+\subsection{Twice Around the Tree algorithm}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.3\textwidth]{fig2.jpg}
-\caption{This figure is an example of a figure caption taking more than one
-  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
-\label{fig:exampleFig2}
-\end{figure}
+The results show that the algorithm is very fast, and consumes the least amount
+of memory among all of the others. However, it is also the least accurate, with
+    Apresentar os experimentos e discutir os resultados. Você deve avaliar os
+    limites de cada algoritmo/implementação, tentando buscar uma relação entre
+    tamanho da instância e desempenho. Deve também comparar os algoritmos
+    entre si. Tente responder quando cada implementação se sai melhor ou
+    deveria ser usada.
 
-In tables, try to avoid the use of colored or shaded backgrounds, and avoid
-thick, doubled, or unnecessary framing lines. When reporting empirical data,
-do not use more decimal digits than warranted by their precision and
-reproducibility. Table caption must be placed before the table (see Table 1)
-and the font used must also be Helvetica, 10 point, boldface, with 6 points of
-space before and after each caption.
-
-\begin{table}[ht]
-\centering
-\caption{Variables to be considered on the evaluation of interaction
-  techniques}
-\label{tab:exTable1}
-\includegraphics[width=.7\textwidth]{table.jpg}
-\end{table}
-
-\section{Images}
-
-All images and illustrations should be in black-and-white, or gray tones,
-excepting for the papers that will be electronically available (on CD-ROMs,
-internet, etc.). The image resolution on paper should be about 600 dpi for
-black-and-white images, and 150-300 dpi for grayscale images.  Do not include
-images with excessive resolution, as they may take hours to print, without any
-visible difference in the result. 
+\section{}
+    Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
+    com seus experimentos.
 
 \section{References}
 
-Bibliographic references must be unambiguous and uniform.  We recommend giving
-the author names references in brackets, e.g. \cite{knuth:84},
-\cite{boulic:91}, and \cite{smith:99}.
-
-The references must be listed using 12 point font size, with 6 points of space
-before each reference. The first line of each reference should not be
-indented, while the subsequent should be indented by 0.5 cm.
+https://brilliant.org/wiki/traveling-salesperson-problem/
+https://www.cs.ubc.ca/~hutter/previous-earg/EmpAlgReadingGroup/TSP-JohMcg97.pdf
+https://www.youtube.com/watch?v=GiDsjIBOVoA
+http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
+https://www.overleaf.com/latex/templates/sbc-conferences-template/blbxwjwzdngr
+https://www.youtube.com/watch?v=dNCwtFJLsKI&pp=ygUmY2hpc3RvZmlkZXMgYWxnb3JodG0gc2F1Y2VsZXNzZ2l1c2VwcGU%3D
+https://networkx.github.io/documentation/latest/index.html
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
