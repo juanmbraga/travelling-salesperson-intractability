@@ -27,7 +27,7 @@ def main():
     datasets_file = 'dataset_schema.txt'
     statistics_file = 'statistics.csv'
 
-    run_twice_around_the_tree = False 
+    run_twice_around_the_tree = True 
     run_christofides = True
     run_branch_and_bound = False
 
@@ -54,7 +54,7 @@ def main():
             if run_twice_around_the_tree:
                 (tt_shortest_path, tt_total_distance), tt_time = measure_execution_time(twice_around_the_tree, graph)
                 if skip_memory_monitoring or dataset_name in problematic_datasets:
-                    tt_memory = None
+                    tt_memory = "ignored"
                 else:
                     tt_memory = measure_memory_usage(twice_around_the_tree, graph)
                 tt_precision = round(tt_total_distance / float(optimal_solution), 2)
@@ -64,7 +64,7 @@ def main():
             if run_christofides:
                 (cf_shortest_path, cf_total_distance), cf_time = measure_execution_time(christofides, graph)
                 if skip_memory_monitoring or dataset_name in problematic_datasets:
-                    cf_memory = None
+                    cf_memory = "ignored"
                 else:
                     cf_memory = measure_memory_usage(christofides, graph)
                 cf_precision = round(cf_total_distance / float(optimal_solution), 2)
@@ -74,7 +74,7 @@ def main():
             if run_branch_and_bound:
                 (bb_shortest_path, bb_total_distance), bb_time = measure_execution_time(branch_and_bound, graph)
                 if skip_memory_monitoring or dataset_name in problematic_datasets:
-                    bb_memory = None
+                    bb_memory = "ignored"
                 else:
                     bb_memory = measure_memory_usage(branch_and_bound, graph)
                 bb_precision = round(bb_total_distance / float(optimal_solution), 2)
