@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+%\usepackage[brazil]{babel}   
+\usepackage[utf8]{inputenc}  
+
+     
+\sloppy
+
+\title{Travelling Salesperson Problem:\\ Different Approaches and Performance in Exponential Time}
+
+\author{Juan M. Braga F.\inst{1}}
+
+
+\address{Departamento de Ciência da Computação -- Universidade Federal de Minas Gerais
+  (UFMG)\\
+  Av. Pres. Antônio Carlos, 6627 -- Pampulha -- Belo Horizonte -- MG -- Brazil
+  \email{juanbraga@ufmg.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+  This paper documents the practical aspects of implementing solutions
+  for the Travelling Salesperson Problem, a well known difficult problem that requires
+  exponential time for the optimal solution. Three algorithms were implemented:
+  an exact solution through the branch-and-bound technique, and two other approximations,
+  the twice-around-the-tree and Christofides algorithms.
+\end{abstract}
+     
+\begin{resumo} 
+  Este artigo documenta os aspectos práticos da implementação de soluções
+  para o Problema do Caixeiro Viajante, um problema bem conhecido e difícil que requer
+  tempo exponencial para encontrar a solução ótima. Foram implementados três algoritmos:
+  uma solução exata através da técnica de branch-and-bound, e duas outras aproximações,
+  os algoritmos twice-around-the-tree e Christofides.
+\end{resumo}
+
+
+\section{Introducing the Travelling Salesperson Problem}
+
+The Travelling Salesperson Problem (TSP) is aptly described by [BRILLIANT] 
+
+\begin{quote}
+  "A salesperson needs to visit a set of cities to sell their goods. They know how 
+  many cities they need to go to and the distances between each city. In what order 
+  should the salesperson visit each city exactly once so that they minimize their 
+  travel time and so that they end their journey in their city of origin?"
+\end{quote}
+
+The TSP is a well known \textbf{intractable problem}, which in the context of 
+algorithms means that the time and/or space required to solve the problem grows 
+exponentially with the size of the input, making it impractical to solve even for 
+relatively small inputs.
+
+This project documents the development of three solutions for the given problem: 
+branch-and-bound, twice-around-the-tree, and Christofides algorithms. It focuses 
+on evaluating the real-world challenges associated with them, such as planning and 
+optimizing them, making informed decisions on data structures and libraries, and 
+analyzing the use of resources.
+
+\section{First Page} \label{sec:firstpage}
+
+The first page must display the paper title, the name and address of the
+authors, the abstract in English and ``resumo'' in Portuguese (``resumos'' are
+required only for papers written in Portuguese). The title must be centered
+over the whole page, in 16 point boldface font and with 12 points of space
+before itself. Author names must be centered in 12 point font, bold, all of
+them disposed in the same line, separated by commas and with 12 points of
+space after the title. Addresses must be centered in 12 point font, also with
+12 points of space after the authors' names. E-mail addresses should be
+written using font Courier New, 10 point nominal size, with 6 points of space
+before and 6 points of space after.
+
+The abstract and ``resumo'' (if is the case) must be in 12 point Times font,
+indented 0.8cm on both sides. The word \textbf{Abstract} and \textbf{Resumo},
+should be written in boldface and must precede the text.
+
+\section{CD-ROMs and Printed Proceedings}
+
+In some conferences, the papers are published on CD-ROM while only the
+abstract is published in the printed Proceedings. In this case, authors are
+invited to prepare two final versions of the paper. One, complete, to be
+published on the CD and the other, containing only the first page, with
+abstract and ``resumo'' (for papers in Portuguese).
+
+\section{Sections and Paragraphs}
+
+Section titles must be in boldface, 13pt, flush left. There should be an extra
+12 pt of space before each title. Section numbering is optional. The first
+paragraph of each section should not be indented, while the first lines of
+subsequent paragraphs should be indented by 1.27 cm.
+
+\subsection{Subsections}
+
+The subsection titles must be in boldface, 12pt, flush left.
+
+\section{Figures and Captions}\label{sec:figs}
+
+
+Figure and table captions should be centered if less than one line
+(Figure~\ref{fig:exampleFig1}), otherwise justified and indented by 0.8cm on
+both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
+be Helvetica, 10 point, boldface, with 6 points of space before and after each
+caption.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{fig1.jpg}
+\caption{A typical figure}
+\label{fig:exampleFig1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.3\textwidth]{fig2.jpg}
+\caption{This figure is an example of a figure caption taking more than one
+  line and justified considering margins mentioned in Section~\ref{sec:figs}.}
+\label{fig:exampleFig2}
+\end{figure}
+
+In tables, try to avoid the use of colored or shaded backgrounds, and avoid
+thick, doubled, or unnecessary framing lines. When reporting empirical data,
+do not use more decimal digits than warranted by their precision and
+reproducibility. Table caption must be placed before the table (see Table 1)
+and the font used must also be Helvetica, 10 point, boldface, with 6 points of
+space before and after each caption.
+
+\begin{table}[ht]
+\centering
+\caption{Variables to be considered on the evaluation of interaction
+  techniques}
+\label{tab:exTable1}
+\includegraphics[width=.7\textwidth]{table.jpg}
+\end{table}
+
+\section{Images}
+
+All images and illustrations should be in black-and-white, or gray tones,
+excepting for the papers that will be electronically available (on CD-ROMs,
+internet, etc.). The image resolution on paper should be about 600 dpi for
+black-and-white images, and 150-300 dpi for grayscale images.  Do not include
+images with excessive resolution, as they may take hours to print, without any
+visible difference in the result. 
+
+\section{References}
+
+Bibliographic references must be unambiguous and uniform.  We recommend giving
+the author names references in brackets, e.g. \cite{knuth:84},
+\cite{boulic:91}, and \cite{smith:99}.
+
+The references must be listed using 12 point font size, with 6 points of space
+before each reference. The first line of each reference should not be
+indented, while the subsequent should be indented by 0.5 cm.
+
+\bibliographystyle{sbc}
+\bibliography{sbc-template}
+
+\end{document}
