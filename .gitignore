@@ -12,3 +12,4 @@ algorithms/__pycache__/christofides.cpython-311.pyc
 algorithms/__pycache__/branch_and_bound.cpython-311.pyc
 __pycache__/preprocessor.cpython-311.pyc
 statistics.csv
+dataset_adapted.txt
