@@ -15,3 +15,4 @@ statistics.csv
 dataset_adapted.txt
 *.csv#
 *.xlsx
+*.pyc
