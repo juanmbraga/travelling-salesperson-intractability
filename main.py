@@ -28,10 +28,11 @@ def main():
     statistics_file = 'statistics.csv'
 
     run_twice_around_the_tree = False 
-    run_christofides = False
+    run_christofides = True
     run_branch_and_bound = False
-    skip_problematic_memory_monitoring = True  # Set this to True if you want to skip memory usage for specific datasets
-    problematic_datasets = ['rl5915', 'rl5934', 'rl11849', 'usa13509', 'brd14051', 'd15112', 'd18512']  # Add the names of the problematic datasets here
+
+    skip_memory_monitoring = True
+    problematic_datasets = ['rl5915', 'rl5934', 'rl11849', 'usa13509', 'brd14051', 'd15112', 'd18512'] + []
 
     with open(datasets_file, 'r') as file:
         next(file)  # Skip the first line
@@ -52,7 +53,7 @@ def main():
             # Measure execution time and memory usage for each algorithm
             if run_twice_around_the_tree:
                 (tt_shortest_path, tt_total_distance), tt_time = measure_execution_time(twice_around_the_tree, graph)
-                if skip_problematic_memory_monitoring and dataset_name in problematic_datasets:
+                if skip_memory_monitoring or dataset_name in problematic_datasets:
                     tt_memory = None
                 else:
                     tt_memory = measure_memory_usage(twice_around_the_tree, graph)
@@ -62,7 +63,7 @@ def main():
 
             if run_christofides:
                 (cf_shortest_path, cf_total_distance), cf_time = measure_execution_time(christofides, graph)
-                if skip_problematic_memory_monitoring and dataset_name in problematic_datasets:
+                if skip_memory_monitoring or dataset_name in problematic_datasets:
                     cf_memory = None
                 else:
                     cf_memory = measure_memory_usage(christofides, graph)
@@ -72,7 +73,7 @@ def main():
 
             if run_branch_and_bound:
                 (bb_shortest_path, bb_total_distance), bb_time = measure_execution_time(branch_and_bound, graph)
-                if skip_problematic_memory_monitoring and dataset_name in problematic_datasets:
+                if skip_memory_monitoring or dataset_name in problematic_datasets:
                     bb_memory = None
                 else:
                     bb_memory = measure_memory_usage(branch_and_bound, graph)
