@@ -42,7 +42,7 @@
 \end{resumo}
 
 
-\section{Introducing the Travelling Salesperson Problem}
+\section{Introducing the Travelling Salesperson Problem} \label{sec:intro}
 
 The Travelling Salesperson Problem (TSP) is aptly described by \cite{brilliant_explanation} 
 
@@ -63,7 +63,7 @@ focusing on evaluating the real-world challenges associated with them, such as p
 optimization, making informed decisions on data structures and libraries, and 
 analyzing the usage of computer resources.
 
-\section{Modelling and Implementation}
+\section{Modelling and Implementation} \label{sec:model}
 
 The TSP problem can be conveniently modeled by a weighted graph, with the graph's 
 nodes representing the cities and the edge weights specifying the distances.
@@ -72,7 +72,7 @@ To solve it, three algorithms were implemented in this project: an optimal solut
 the branch-and-bound technique, and two approximations, the twice-around-the-tree and the 
 Christofides algorithms.
 
-\subsection{Optimal Solution}
+\subsection{Optimal Solution} \label{sec:optimal_explanation}
 
 Branch and bound is a general method that tries to divide a problem into smaller subproblems,
 and then makes informed decisions to discard some of these subproblems to reach the optimal solution.
@@ -96,7 +96,7 @@ focusing on the most promising paths.
 
 [TODO START COST ESTIMATE]
 
-\subsection{Approximate Solution: Christofides}
+\subsection{Approximate Solution: Christofides} \label{sec:chris_explanation}
 
 The Christofides algorithm was built by leveraging a key insight: many of the edges on the 
 optimal solution are often found on the Minimmum Spanning Tree (MST) of the same graph 
@@ -123,12 +123,12 @@ worst-case guarantee than any other currently known tour construction heuristic:
 [and] it also tends to find better tours in practice. However, [C]omputing the minimum-length 
 matching on the odd-degree vertices remains the bottleneck of the algorithm.
 
-\subsection{Approximate Solution: Twice Around the Tree}
+\subsection{Approximate Solution: Twice Around the Tree} \label{sec:twice_explanation}
 
 [TODO DESCRIPTION OF TWICE-AROUND-THE-TREE]
 [guarantee of 2 of optimal solution]
 
-\subsection{Implementation Choices}
+\subsection{Implementation Choices} \label{sec:implementation}
 
 The programming language used was Python 3.12, and the program was executed 
 in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a computer with a 
@@ -158,7 +158,7 @@ two executions: one for testing time and performance and another to keep track o
 - Run the code in a terminal with the following command: \texttt{python main.py} or \texttt{python3 main.py}.
 - The results will be located on a file called \texttt{statistics.csv}.
 
-\section{Experiments} \label{sec:firstpage}
+\section{Experiments} \label{sec:experiments}
     Apresentar os experimentos e discutir os resultados. Você deve avaliar os
     limites de cada algoritmo/implementação, tentando buscar uma relação entre
     tamanho da instância e desempenho. Deve também comparar os algoritmos
@@ -170,7 +170,7 @@ to find the solution, the amount of memory used and the quality of the solutions
 compared to the optimal solution (see [TODO SECTION IMPLEMENTATION CITE] for information 
 on libraries used).
 
-\subsecion{Memory Use}
+\subsecion{Memory Use} \label{sec:exp_memory}
 
 The first and most important aspect when dealing with exponential optimisation algorithms such as 
 the TSP is the use of memory. In order to make informed decisions about all possible combinations, 
@@ -189,8 +189,10 @@ For the
 \label{fig:mem_use}
 \end{figure}
 
-starting with the datasets with 3795 cities (fl3795) for the Christofides algorithm, 
-and with [TODO NUMBER] cities ([TODO DATASET]) for the Twice-around-the-tree, the the allocated memory did surpass 
+construction: 5915 chris, X twice
+total: X chris, 5934 twice
+starting with the datasets with 5915 cities (rl5915) for the Christofides algorithm, 
+and with 4461 cities (fnl4461) for the Twice-around-the-tree, the the allocated memory did surpass 
 the available RAM capacity ([TODO REFERENCE SECTION WITH MEMORY]) and storage in the \texttt{swap}/\texttt{paging} 
 file 
 \footnote{Swap or Page file is a section of a hard drive used as a temporary location to store information 
@@ -202,7 +204,7 @@ Datasets starting with [TODO] cities for the Twice-around-the-tree and with [TOD
 not even able to be stored in the available memory and caused the computer to crash.
 
 
-\subsection{Solution Quality}
+\subsection{Solution Quality} \label{sec:exp_quality}
 
 The graph of the Figure~\ref{fig:quality_ratio} shows the ratio \frac{Approximate Solution}{Optimial Solution}.
 
@@ -217,7 +219,7 @@ The Twice-around-the-tree stays consistently below the expected theoretical wors
 twice the optimal solution, and the Christofides solutions find paths that are consistently better and closer to it, 
 also keeping the tight 1.5 quality ratio.
 
-\subsection{Execution Time}
+\subsection{Execution Time} \label{sec:exp_time}
 
 The execution time of the algorithms can be compared with the following Figure~\ref{fig:exec_time}.
 
@@ -230,14 +232,14 @@ The execution time of the algorithms can be compared with the following Figure~\
 
 The Christofides algorithm takes significantly longer to run when compared to the Twice-arount-the-tree. 
 In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
-has diagnosed that the algorithms exceeded the available RAM memory (See [TODO SECTION]), and therefore 
+has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}), and therefore 
 the graph does not display their ideal behviour (suffering from the slow speeds of the swap/paging memory).
 
 The use of the \texttt{swap} therefore indicates that the time data does not perfectly represent the ideal behaviour 
 of the algorithms, and perfectly illustrates how difficult it is to optimise exponential algorithms for relatively 
 small cases. [TODO REFER SECTION ON MEMORY]
 
-\section{Conclusions}
+\section{Conclusions} \label{sec:conclusions}
     Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
     com seus experimentos.
 
