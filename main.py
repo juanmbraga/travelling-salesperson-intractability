@@ -28,7 +28,7 @@ def main():
     statistics_file = 'statistics.csv'
 
     run_twice_around_the_tree = False 
-    run_christofides = True
+    run_christofides = False
     run_branch_and_bound = False
     skip_problematic_memory_monitoring = True  # Set this to True if you want to skip memory usage for specific datasets
     problematic_datasets = ['rl5915', 'rl5934', 'rl11849', 'usa13509', 'brd14051', 'd15112', 'd18512']  # Add the names of the problematic datasets here
@@ -43,7 +43,7 @@ def main():
         writer = csv.writer(file)
 
         # Write the header
-        writer.writerow(['Dataset Name', 'Number of Nodes', 'Algorithm', 'Total Distance', 'Execution Time', 'Memory Usage'])
+        writer.writerow(['Dataset Name', 'Number of Nodes', 'Algorithm', 'Total Distance', 'Execution Time', 'Memory Usage', 'Precision'])
 
         for dataset in datasets:
             dataset_name, num_nodes, optimal_solution = dataset
@@ -56,7 +56,8 @@ def main():
                     tt_memory = None
                 else:
                     tt_memory = measure_memory_usage(twice_around_the_tree, graph)
-                writer.writerow([dataset_name, num_nodes, 'Twice Around the Tree', tt_total_distance, tt_time, tt_memory])
+                tt_precision = round(tt_total_distance / float(optimal_solution), 2)
+                writer.writerow([dataset_name, num_nodes, 'Twice Around the Tree', tt_total_distance, tt_time, tt_memory, tt_precision])
                 file.flush()  # Flush the buffer to update the file
 
             if run_christofides:
@@ -65,7 +66,8 @@ def main():
                     cf_memory = None
                 else:
                     cf_memory = measure_memory_usage(christofides, graph)
-                writer.writerow([dataset_name, num_nodes, 'Christofides', cf_total_distance, cf_time, cf_memory])
+                cf_precision = round(cf_total_distance / float(optimal_solution), 2)
+                writer.writerow([dataset_name, num_nodes, 'Christofides', cf_total_distance, cf_time, cf_memory, cf_precision])
                 file.flush()  # Flush the buffer to update the file
 
             if run_branch_and_bound:
@@ -74,7 +76,8 @@ def main():
                     bb_memory = None
                 else:
                     bb_memory = measure_memory_usage(branch_and_bound, graph)
-                writer.writerow([dataset_name, num_nodes, 'Branch and Bound', bb_total_distance, bb_time, bb_memory])
+                bb_precision = round(bb_total_distance / float(optimal_solution), 2)
+                writer.writerow([dataset_name, num_nodes, 'Branch and Bound', bb_total_distance, bb_time, bb_memory, bb_precision])
                 file.flush()  # Flush the buffer to update the file
 
 if __name__ == '__main__':
