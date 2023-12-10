@@ -143,20 +143,38 @@ For keeping track of time and allocated memory, the libraries \texttt{time} and
 \texttt{memory_profiler} were chosen, as they provided the most convenient interface.
 
 \section{Experiments} \label{sec:firstpage}
-
-\subsection{Twice Around the Tree algorithm}
-
-The results show that the algorithm is very fast, and consumes the least amount
-of memory among all of the others. However, it is also the least accurate, with
     Apresentar os experimentos e discutir os resultados. Você deve avaliar os
     limites de cada algoritmo/implementação, tentando buscar uma relação entre
     tamanho da instância e desempenho. Deve também comparar os algoritmos
     entre si. Tente responder quando cada implementação se sai melhor ou
     deveria ser usada.
 
-\subsection{Christofides}
+The qualities of each algorithm will be evaluated through four metrics: the time elapsed 
+to find the solution, the amount of memory used and the quality of the solutions found 
+compared to the optimal solution (see [TODO SECTION IMPLEMENTATION CITE] for information 
+on libraries used).
 
-\subsection{Branch and Bound}
+\subsection{Execution Time}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{execution_time_comparison.png}
+\caption{Figure 1. Chart comparing the time elapsed between the Christofides and the Twice-around-the-tree algorithms.}
+\label{fig:exec_time}
+\end{figure}
+
+\subsecion{Memory Use}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{memory_use_comparison.png}
+\caption{Figure 1. Chart comparing the allocated memory between the Christofides and the Twice-around-the-tree algorithms.}
+\label{fig:mem_use}
+\end{figure}
+
+\subsection{Solution Quality}
+
+\subsection{Twice Around the Tree algorithm}
 
 
 \section{Conclusions}
