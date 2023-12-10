@@ -22,7 +22,6 @@ def generate_graph(file_name):
             if line.strip() == "NODE_COORD_SECTION":
                 break
 
-        # Process the lines after "NODE_COORD_SECTION"
         for line in file:
             # Process each line of the file and add nodes to the graph
             if line.strip() == "EOF":
@@ -32,13 +31,17 @@ def generate_graph(file_name):
             graph.add_node(node, pos=(float(x), float(y)))
 
     # Connect every node to every other node
-    for node1 in graph.nodes:
-        for node2 in graph.nodes:
-            if node1 != node2 and not graph.has_edge(node1, node2):  # Check if edge already exists
+    nodes = list(graph.nodes)
+    for i in range(len(nodes)):
+        for j in range(i + 1, len(nodes)):
+            node1 = nodes[i]
+            node2 = nodes[j]
+            if not graph.has_edge(node1, node2):  # Check if edge already exists
                 coord1 = graph.nodes[node1]["pos"]
                 coord2 = graph.nodes[node2]["pos"]
                 distance_value = distance(coord1, coord2)
                 graph.add_edge(node1, node2, weight=distance_value)
                 graph.add_edge(node2, node1, weight=distance_value)
-
+        del graph.nodes[nodes[i]]["pos"]
+        
     return graph
