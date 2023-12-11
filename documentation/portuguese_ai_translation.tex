@@ -71,6 +71,8 @@ distância do caminho atual com a distância mínima para qualquer cidade não v
 para cada caminho parcial, o algoritmo de branch and bound descarta subproblemas que não podem 
 levar à solução ótima, concentrando-se efetivamente nos caminhos mais promissores.
 
+Além disso, pode-se fazer uma escolha sobre qual método utilizar para percorrer o "espaço" de possibilidades: \textbf{best-first-search} ou \textbf{depth-first-search}. A variedade \textit{best} significa que o caminho de cada cidade vizinha será calculado antes de fazer uma escolha, o que permitirá ao algoritmo tomar decisões mais informadas para descartar os ramos, mas exigirá mais memória. Em segundo lugar, a variedade \textit{depth} de travessia é a busca padrão que se aprofunda na árvore, o que exigirá menos espaço, mas pode levar mais tempo percorrendo os ramos. Como esta é uma abordagem dispendiosa, foi escolhido o DFS.
+
 A técnica de branch and bound tem uma complexidade de tempo no \textbf{pior caso} de $O(n!)$, 
 onde $n$ é o número de cidades, pois pode ser necessário explorar todas as permutações possíveis. 
 No entanto, a limitação eficaz pode reduzir significativamente o número de permutações examinadas, 
@@ -203,9 +205,9 @@ Em segundo lugar, a partir do conjunto de dados \texttt{rl11849}, o computador n
 
 \footnotetext{Mesmo que o computador tenha travado ao atingir o uso máximo de RAM + \texttt{swap}, o estudante observou que, ao executar no Microsoft Windows em vez de Ubuntu em tais circunstâncias, não ocorreu travamento. Infelizmente, a máquina disponível com Windows era menos potente e levaria muito mais tempo.}
 
-Em geral, para usar um conjunto de dados pequeno para ajustar a execução do algoritmo de Christofides, a Figura~\ref{fig:memory_behaviour} (b) exibe como a pegada de memória para ambos os algoritmos é bastante semelhante.
+A Figura~\ref{fig:memory_behaviour} (b) exibe como a pegada de memória para ambos os algoritmos é bastante semelhante (usando um conjunto de dados pequeno para adequar a execução do algoritmo de Christofides).
 
-[TODO BNB]
+O estudante não conseguiu implementar uma solução útil de branch-and-bound para comparar com as aproximações. Todas as tentativas, tanto em Python quanto em C++, causaram um uso explosivo de memória, travando o computador mesmo para o menor conjunto de dados. O estudante é obrigado a concluir que tentar resolver esse problema com essa abordagem não é prático no sentido absoluto, embora possa haver maneiras mais astutas e eficientes de implementação. No entanto, ele está seguro de que escolher o \textit{Depth-First-Search} foi a intuição correta.
 
 \subsection{Qualidade da Solução} \label{sec:exp_quality}
 
