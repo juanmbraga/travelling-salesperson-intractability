@@ -27,7 +27,7 @@
 
 \begin{abstract}
   This paper documents the practical aspects of implementing solutions
-  for the Travelling Salesperson Problem, a well known difficult problem that requires
+  for the Travelling Salesperson Problem, a well-known difficult problem that requires
   exponential time for the optimal solution. Three algorithms were implemented:
   an exact solution through the branch-and-bound technique, and two other approximations,
   the twice-around-the-tree and Christofides algorithms.
@@ -53,7 +53,7 @@ The Travelling Salesperson Problem (TSP) is aptly described by \cite{brilliant_e
   travel time and so that they end their journey in their city of origin?"
 \end{quote}
 
-The TSP is a well known \textbf{intractable problem}, which in the context of 
+The TSP is a well-known \textbf{intractable problem}, which in the context of 
 algorithms means that the time and/or space required to solve the problem grows 
 exponentially with the size of the input, making it impractical to solve even for 
 relatively small inputs.
@@ -61,11 +61,11 @@ relatively small inputs.
 This project documents the development of three solutions for the given problem, 
 focusing on evaluating the real-world challenges associated with them, such as planning and 
 optimization, making informed decisions on data structures and libraries, and 
-analyzing the usage of computer resources.
+analysing the usage of computer resources.
 
 \section{Algorithms} \label{sec:algorithms}
 
-The TSP problem can be conveniently modeled by a weighted graph, with the graph's 
+The TSP problem can be conveniently modelled by a weighted graph, with the graph's 
 nodes representing the cities and the edge weights specifying the distances.
 
 To solve it, three algorithms were implemented in this project: an optimal solution using 
@@ -81,7 +81,7 @@ To consider it in the TSP context, one benefits from \textbf{picturing the probl
 represents a city and each edge a path between two cities. Then, the first node can be any city 
 (since one can start from any city of the optimal path without changing the path distance), and 
 the path from the origin node to a leaf in the graph should represent the total 
-lengh of that path.
+length of that path.
 
 However, simply storing the entire tree will evidently yield an enormous amount 
 of data, as all possible combinations would end up stored in memory. That is why the 
@@ -103,8 +103,8 @@ the specific instance of the problem and the bounding technique used.
 \subsection{Approximate Solution: Christofides} \label{sec:chris_explanation}
 
 The Christofides algorithm was built by leveraging a key insight: many of the edges on the 
-optimal solution are often found on the Minimmum Spanning Tree (MST) of the same graph 
-\footnote{\cite{reducible_explanation}}. Therefore, as there are known relativelly efficient 
+optimal solution are often found on the Minimum Spanning Tree (MST) of the same graph 
+\footnote{\cite{reducible_explanation}}. Therefore, as there are known relatively efficient 
 algorithms for generating the MST, it makes sense to try and make use of this fact.
 
 To form an optimal solution, all nodes of the MST should have an even number of edges, so 
@@ -113,7 +113,7 @@ that the salesperson could enter and leave the city through exactly two edges (a
 which will require more edges to be added.
 
 The second part of the solution involves finding good edge candidates to append to te odd 
-edges. Out of multiple available options, the approach used in this implementation was the minimun-length
+edges. Out of multiple available options, the approach used in this implementation was the minimmn-length
 matching of the odd-degree nodes, which tries to find a maximum matching in a bipartite 
 graph with minimum total weight. In other words, it tries to find the best nodes (shortest distance) 
 that connect every pair of the odd-degree nodes of the MST.
@@ -124,7 +124,7 @@ traversing this graph while taking shortcuts to avoid visiting multiple cities.
 
 According to \cite{Johnson2003}, the Christofides algorithm provides a better 
 \textbf{worst-case} guarantee than any other currently known tour construction heuristic: a worst case ratio of 1.5; 
-[and] it also tends to find better tours in practice. However, [c]omputing the minimum-length 
+[and] it also tends to find better tours in practice. However, computing the minimum-length 
 matching on the odd-degree vertices remains the bottleneck of the algorithm.
 
 \subsection{Approximate Solution: Twice Around the Tree} \label{sec:twice_explanation}
@@ -142,7 +142,7 @@ This algorithm has a \textbf{worst-case} guarantee of 2 (also called \textit{2-a
 that the total cost of the path found is at most twice the cost of the MST.
 
 One can implement an optimisation and reach an algorithm similar to the \textit{Approx-TSP-Tour} 
-described by \cite{cormen}, and this approach has polynomial time: it's complexity is $NumberOfCities^2$.
+described by \cite{cormen}, and this approach has polynomial time: its complexity is $NumberOfCities^2$.
 
 
 \section{Implementation Choices and Execution Instructions} \label{sec:implementation}
@@ -152,7 +152,7 @@ in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a com
 Intel Core i5-4690K processor and 8GB of RAM at 2133MHz.
 
 The \textbf{datasets} were selected by the professor from the TSPLIB \cite{dataset_lib}. They are 
-composed of \texttt{.tsp} files with the node key and its $x$ and $y$ location in the carthesian plane. 
+composed of \texttt{.tsp} files with the node key and its $x$ and $y$ location in the cartesian plane. 
 The graphs are to be constructed by considering that all cities are connected to all other cities, forming 
 a totally connected graph.
 
@@ -171,7 +171,7 @@ two executions: one for testing time and performance and another to keep track o
 \begin{itemize}
   \item Make sure that a compatible Python version and the libraries used (See above) are installed.
   \item Select the desired datasets to be used in the \texttt{dataset\_schema.txt} file.
-  \item Make sure the respecive dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
+  \item Make sure the respective dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
   \item Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file.
   \item Run the code in a terminal with the following command: \texttt{python main.py} or \texttt{python3 main.py}.
   \item The results will be located on a file called \texttt{statistics.csv}.
@@ -192,7 +192,7 @@ on libraries used).
 \subsection{Memory Use} \label{sec:exp_memory}
 
 The first and most important aspect when dealing with exponential optimisation algorithms such as 
-the TSP is the use of memory. In order to make informed decisions about all possible combinations, 
+the TSP is the use of memory. To make informed decisions about all possible combinations, 
 it is often necessary to store information about many or all of the previous decisions, not to 
 mention storing the entire problem.
 
@@ -268,7 +268,7 @@ The execution time of the algorithms can be compared with the following Figure~\
 \label{fig:exec_time}
 \end{figure}
 
-The Christofides algorithm takes significantly longer to run when compared to the Twice-arount-the-tree. 
+The Christofides algorithm takes significantly longer to run when compared to the Twice-around-the-tree. 
 In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
 has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}). 
 This fact can explain why the \texttt{fnl4461} has shown such a drastic increase in execution time: the use 
@@ -283,6 +283,8 @@ significantly faster and should provide good-enough answers for the right situat
 \section{Conclusions} \label{sec:conclusions}
     Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
     com seus experimentos.
+
+  [TODO CONCLUSION]
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
