@@ -94,6 +94,14 @@ maintaining this metric for each partial path, the branch and bound algorithm
 discards subproblems that cannot possibly lead to the optimal solution, effectively 
 focusing on the most promising paths.
 
+Additionally, there can be made a choice of which method to traverse the "space" of 
+possibilities: \textbf{best-first-search} or \textbf{depth-first-search}. The \textit{best} 
+variety means that every neighbouring city will have its path calculated before a choice is 
+made, which will allow the algorithm to make better-informed decisions to discard the branches, 
+but will require a more memory. And secondly, the \textit{depth} variety of traversal is the 
+standart search that goes deeper in the tree, which will require less space but may spend more 
+time traversing the branches. As this is an expensive approach, the DFS was chosen.
+
 The branch-and-bound technique has a \textbf{Worst-case} time complexity of $O(n!)$, 
 where $n$ is the number of cities, because it may need to explore all possible permutations. 
 However, effective bounding can significantly reduce the number of examined permutations, 
@@ -231,10 +239,14 @@ As the use of the memory\_profiler gives us a significantly larger memory footpr
 in Microsoft Windows instead of Ubuntu in such circumstances did not cause a crash. Unfortunately, the available 
 machine with Windows was underpowered and would take much longer.}
 
-Overall, to use a small dataset to fit the execution of the Christofides algorithm, the Figure~\ref{fig:memory_behaviour} (b) 
-displays how the memory footprint for both algorithms is quite similar.
+The Figure~\ref{fig:memory_behaviour} (b) displays how the memory footprint for both algorithms is quite similar 
+(using a small dataset to fit the execution of the Christofides algorithm).
 
-[TODO BNB]
+The student was not able to implement a useful branch-and-bound solution to compare with the approximations. 
+Every attempt, either in python or C++, has caused an explosive use of memory, crashing the computer 
+even for the smallest dataset. The student is forced to conclude that trying to solve this problem with this 
+approach is not practical in the absolute sense, although there may be trickier and more efficient ways of 
+implementing. He is, however, assured that choosing the \textit{Depth-First-Search} was the right intuition.
 
 \subsection{Solution Quality} \label{sec:exp_quality}
 
