@@ -10,7 +10,7 @@
      
 \sloppy
 
-\title{Travelling Salesperson Problem:\\ Different Approaches and Performance in Exponential Time}
+\title{Travelling Salesperson Problem:\\ Different Approaches and Performance in Exponential Time TODO}
 
 \author{Juan M. Braga F.\inst{1}}
 
@@ -198,7 +198,7 @@ For the algorithms themselves, see the allocated memory for each test case in Fi
 \end{figure}
 
 The graph displays a similar memory footprint for both algorithms. However, to put things in perspective, 
-see the following Figure~\ref{fig:mem_use} 
+we will analyse the Figure~\ref{fig:memory_behaviour}.
 
 \begin{figure}[ht]
 \centering
@@ -209,16 +209,22 @@ see the following Figure~\ref{fig:mem_use}
 
 The first thing that must be noted it that for each algorithm there was a dataset where the allocated memory surpassed 
 the available RAM capacity (See Section~\ref{sec:implementation} for computer specifications) and storage in the \texttt{swap}
-\footnote{Swap or Page file is a section of a hard drive used as a temporary location to store information 
-when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
-compared with the primary memory.} 
-file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the Twice-around-the-tree, 
+\footnotemark file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the Twice-around-the-tree, 
 in Figure~\ref{fig:memory_behaviour} (a). This behaviour is similar in the Christofides algorithm.
 
+\footnotetext{Swap or Page file is a section of a hard drive used as a temporary location to store information 
+when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
+compared with the primary memory.}
+
 Secondly, from the \texttt{rl11849} dataset onward the computer did not have enough memory and swap to 
-even build the graph in the executions without memory monitoring (See Figure~\ref{fig:memory_behaviour} (a)). 
+even build the graph in the executions without memory monitoring (See Figure~\ref{fig:memory_behaviour} 
+(a)), causing the computer to crash\footnotemark. 
 As the use of the memory\_profiler gives us a significantly larger memory footprint, executing the smaller 
 \texttt{rl5915} and \texttt{rl5934} datasets with it was also not possible.
+
+\footnotetext{Even though the computer crashed when reaching maximum RAM + swap usage, the student noticed that running 
+in Microsoft Windows instead of Ubuntu in such circumstances did not cause a crash. Unfortunately, the available 
+machine with Windows was underpowered and would take much longer.}
 
 Overall, to use a small dataset to fit the execution of the Christofides algorithm, the Figure~\ref{fig:memory_behaviour} (b) 
 displays how the memory footprint for both algorithms is quite similar.
@@ -253,7 +259,9 @@ The Christofides algorithm takes significantly longer to run when compared to th
 In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
 has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}). 
 This fact can explain why the \texttt{fnl4461} has shown such a drastic increase in execution time: the use 
-of swap memory has slowed it down, and from this point onward the graph will not display its ideal behviour.
+of swap memory has slowed it down, and from this point onward the graph will not display its ideal behaviour. In 
+other words, this does not constitute as evidence that Christofides algorithm is exponential 
+(See Section~\ref{sec:chris_explanation}).
 
 This perfectly illustrates how difficult of a problem it is to optimise exponential algorithms, even for relatively 
 small cases.
