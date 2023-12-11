@@ -10,7 +10,7 @@
      
 \sloppy
 
-\title{Travelling Salesperson Problem:\\ Different Approaches and Performance in Exponential Time TODO}
+\title{Travelling Salesperson Problem:\\ Handling an Intractable Problem with Approximations}
 
 \author{Juan M. Braga F.\inst{1}}
 
@@ -94,8 +94,6 @@ maintaining this metric for each partial path, the branch and bound algorithm
 discards subproblems that cannot possibly lead to the optimal solution, effectively 
 focusing on the most promising paths.
 
-[TODO START COST ESTIMATE]
-
 The branch-and-bound technique has a \textbf{Worst-case} time complexity of $O(n!)$, 
 where $n$ is the number of cities, because it may need to explore all possible permutations. 
 However, effective bounding can significantly reduce the number of examined permutations, 
@@ -131,8 +129,21 @@ matching on the odd-degree vertices remains the bottleneck of the algorithm.
 
 \subsection{Approximate Solution: Twice Around the Tree} \label{sec:twice_explanation}
 
-[TODO DESCRIPTION OF TWICE-AROUND-THE-TREE]
-[guarantee of 2 of optimal solution]
+The Twice-around-the-tree also uses the MST to generate a solution. The idea is to generate a path by 
+traversing this MST twice, once in each direction (which means cities are allowed to be visited 
+more than once). This can be done by a Depth-First Search (DFS) traversal.
+
+To improve the quality of the solution, the TAT algorithm then tries to shortcut the 
+path by adding extra edges to it. These edges are chosen in such a way as to reduce 
+the overall path length. The algorithm continues to add edges until the path length 
+does not change significantly.
+
+This algorithm has a \textbf{worst-case} guarantee of 2 (also called \textit{2-approximate}), meaning 
+that the total cost of the path found is at most twice the cost of the MST.
+
+One can implement an optimisation and reach an algorithm similar to the \textit{Approx-TSP-Tour} 
+described by \cite{cormen}, and this approach has polynomial time: it's complexity is $NumberOfCities^2$.
+
 
 \section{Implementation Choices and Execution Instructions} \label{sec:implementation}
 
@@ -229,6 +240,8 @@ machine with Windows was underpowered and would take much longer.}
 Overall, to use a small dataset to fit the execution of the Christofides algorithm, the Figure~\ref{fig:memory_behaviour} (b) 
 displays how the memory footprint for both algorithms is quite similar.
 
+[TODO BNB]
+
 \subsection{Solution Quality} \label{sec:exp_quality}
 
 The graph of the Figure~\ref{fig:quality_ratio} shows the ratio $\frac{Approximate Solution}{Optimial Solution}$.
@@ -264,7 +277,8 @@ other words, this does not constitute as evidence that Christofides algorithm is
 (See Section~\ref{sec:chris_explanation}).
 
 This perfectly illustrates how difficult of a problem it is to optimise exponential algorithms, even for relatively 
-small cases.
+small cases. The Twice-around-the-tree, although having a much worse quality then the Christofides, is 
+significantly faster and should provide good-enough answers for the right situations.
 
 \section{Conclusions} \label{sec:conclusions}
     Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
