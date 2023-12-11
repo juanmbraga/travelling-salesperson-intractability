@@ -202,25 +202,26 @@ see the following Figure~\ref{fig:mem_use}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[height=.325\textheight]{memory_behaviour.png}
+\includegraphics[height=.325\textheight]{memory_profile_comparison.png}
 \caption{(a) Graph showing memory use for the Twice-around-the-tree algorithm. (b) Graph showing memory use for the Christofides algorithm.}
 \label{fig:memory_behaviour}
 \end{figure}
 
 The first thing that must be noted it that for each algorithm there was a dataset where the allocated memory surpassed 
-the available RAM capacity (See Section~\ref{sec:implementation} for details) and storage in the \texttt{swap}
+the available RAM capacity (See Section~\ref{sec:implementation} for computer specifications) and storage in the \texttt{swap}
 \footnote{Swap or Page file is a section of a hard drive used as a temporary location to store information 
 when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
 compared with the primary memory.} 
-file was triggered. This can be seen in Figure~\ref{fig:memory_behaviour} (a).
+file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the Twice-around-the-tree, 
+in Figure~\ref{fig:memory_behaviour} (a). This behaviour is similar in the Christofides algorithm.
 
 Secondly, from the \texttt{rl11849} dataset onward the computer did not have enough memory and swap to 
-even build the graph in the executions without memory monitoring. As the use of the memory\_profiler gives us 
-a significantly larger memory footprint, executing the smaller \texttt{rl5915} and \texttt{rl5934} datasets 
-was also not possible.
+even build the graph in the executions without memory monitoring (See Figure~\ref{fig:memory_behaviour} (a)). 
+As the use of the memory\_profiler gives us a significantly larger memory footprint, executing the smaller 
+\texttt{rl5915} and \texttt{rl5934} datasets with it was also not possible.
 
-And finally, the Twice-around-the-tree algorithm displayed a much more "explosive" use of 
-memory, while the Christofides, once built, remained fairly constant. See Figure~\ref{fig:memory_behaviour} (a) and (b).
+Overall, to use a small dataset to fit the execution of the Christofides algorithm, the Figure~\ref{fig:memory_behaviour} (b) 
+displays how the memory footprint for both algorithms is quite similar.
 
 \subsection{Solution Quality} \label{sec:exp_quality}
 
@@ -235,7 +236,7 @@ The graph of the Figure~\ref{fig:quality_ratio} shows the ratio $\frac{Approxima
 
 The Twice-around-the-tree stays consistently below the expected theoretical worst case (Section~\ref{sec:twice_explanation}) of 
 twice the optimal solution, and the Christofides solutions find paths that are consistently better and closer to it, 
-also keeping the tight 1.5 quality ratio.
+also keeping the tight 1.5 quality ratio specified in Section~\ref{sec:chris_explanation}.
 
 \subsection{Execution Time} \label{sec:exp_time}
 
@@ -250,12 +251,12 @@ The execution time of the algorithms can be compared with the following Figure~\
 
 The Christofides algorithm takes significantly longer to run when compared to the Twice-arount-the-tree. 
 In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
-has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}), and therefore 
-the graph does not display their ideal behviour (suffering from the slow speeds of the swap/paging memory).
+has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}). 
+This fact can explain why the \texttt{fnl4461} has shown such a drastic increase in execution time: the use 
+of swap memory has slowed it down, and from this point onward the graph will not display its ideal behviour.
 
-The use of the \texttt{swap} therefore indicates that the time data does not perfectly represent the ideal behaviour 
-of the algorithms, and perfectly illustrates how difficult it is to optimise exponential algorithms for relatively 
-small cases. [TODO REFER SECTION ON MEMORY]
+This perfectly illustrates how difficult of a problem it is to optimise exponential algorithms, even for relatively 
+small cases.
 
 \section{Conclusions} \label{sec:conclusions}
     Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
