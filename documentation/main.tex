@@ -142,8 +142,7 @@ This algorithm has a \textbf{worst-case} guarantee of 2 (also called \textit{2-a
 that the total cost of the path found is at most twice the cost of the MST.
 
 One can implement an optimisation and reach an algorithm similar to the \textit{Approx-TSP-Tour} 
-described by \cite{cormen}, and this approach has polynomial time: its complexity is $NumberOfCities^2$.
-
+described by \cite{cormen}, and this approach has polynomial time: its complexity is $number\_of\_cities^2$.
 
 \section{Implementation Choices and Execution Instructions} \label{sec:implementation}
 
@@ -178,11 +177,6 @@ two executions: one for testing time and performance and another to keep track o
 \end{itemize}
 
 \section{Experiments} \label{sec:experiments}
-    Apresentar os experimentos e discutir os resultados. Você deve avaliar os
-    limites de cada algoritmo/implementação, tentando buscar uma relação entre
-    tamanho da instância e desempenho. Deve também comparar os algoritmos
-    entre si. Tente responder quando cada implementação se sai melhor ou
-    deveria ser usada.
 
 The qualities of each algorithm will be evaluated through four metrics: the time elapsed 
 to find the solution, the amount of memory used and the quality of the solutions found 
