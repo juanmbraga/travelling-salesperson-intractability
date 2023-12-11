@@ -281,10 +281,20 @@ small cases. The Twice-around-the-tree, although having a much worse quality the
 significantly faster and should provide good-enough answers for the right situations.
 
 \section{Conclusions} \label{sec:conclusions}
-    Apresente as conclusões do seu trabalho. Mostre o quê pôde ser percebido
-    com seus experimentos.
 
-  [TODO CONCLUSION]
+Implementing the algorithms provided valuable insights into the real-world aspects of solving the TSP. 
+It demonstrated the trade-offs between solution quality, execution time, and memory requirements, 
+and highlighted the limitations of exponential algorithms, as the branch-and-bound technique can 
+quickly become intractable for even relatively small instances of the problem.
+
+For the approximations, the Cristofides algorithm consistently outperforms the twice-around-the-tree 
+algorithm in terms of solution quality, maintaining a tight 1.5 quality ratio with the optimal 
+solution. However, it is significantly slower. The twice-around-the-tree algorithm, on the other hand, 
+offers a reasonable trade-off between solution quality and execution time.
+
+The results suggest that the twice-around-the-tree algorithm is a good choice for practical applications of the 
+TSP, as it provides a reasonable balance between quality and efficiency. The Christofides algorithm can be used 
+when a high-quality solution is required, but it is important to be aware of its computational limitations.
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
