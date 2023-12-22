@@ -280,12 +280,11 @@ significantly faster and should provide good-enough answers for the right situat
 
 \section{Conclusions} \label{sec:conclusions}
 
-Implementing the algorithms provided valuable insights into the real-world aspects of solving the TSP. 
+Implementing the algorithms provided valuable insights into the real-world aspects of solving the TSP and likely other hard problems. 
 It demonstrated the trade-offs between solution quality, execution time, and memory requirements, 
-and highlighted the limitations of exponential algorithms, as the \textit{Branch and Bound} technique can 
-quickly become intractable for even relatively small instances of the problem.
+and highlighted the limitations of exponential algorithms, as the \textit{Branch and Bound} technique quickly becomes intractable for even relatively small instances of the problem.
 
-For the approximations, the Cristofides algorithm consistently outperforms the \textit{Twice Around the Tree} 
+For the approximations, both had very similar memory requirements, but the Cristofides algorithm consistently outperformed the \textit{Twice Around the Tree} 
 algorithm in terms of solution quality, maintaining a tight 1.5 quality ratio with the optimal 
 solution. However, it is significantly slower. The \textit{Twice Around the Tree} algorithm, on the other hand, 
 offers a reasonable trade-off between solution quality and execution time.
