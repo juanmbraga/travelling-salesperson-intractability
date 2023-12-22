@@ -68,33 +68,21 @@ analysing the usage of computer resources.
 \section{Algorithms} \label{sec:algorithms}
 
 The TSP problem can be conveniently modelled by a weighted graph, with the graph's 
-nodes representing the cities and the edge weights specifying the distances.
+nodes representing the cities and the edge weights specifying the distances. One benefits 
+from \textbf{picturing the problem as a tree}, especially in the Section~\ref{sec:algorithms}.
 
-To solve it, three algorithms were implemented in this project: an optimal solution using 
-the branch-and-bound technique, and two approximations, the twice-around-the-tree and the 
-Christofides algorithms.
+In this project, three algorithms were implemented: an optimal solution using the \textit{Branch and Bound} technique, and two approximations, the \textit{Twice Around the Tree} and the 
+\textit{Christofides} algorithms.
 
 \subsection{Optimal Solution} \label{sec:optimal_explanation}
 
-Branch and bound is a general method that tries to divide a problem into smaller subproblems,
-and then makes informed decisions to discard some of these subproblems to reach the optimal solution.
+As a hard problem, the most straightforward approach is the \textit{brute force} method, which involves generating all possible permutations of the cities and calculating the total distance for each permutation. However, evaluating the permutations quickly becomes impractical as the number of cities increases, and this may just be the only way to look for the optimal solution on similar problems.
 
-To consider it in the TSP context, one benefits from \textbf{picturing the problem as a tree}, where each node 
-represents a city and each edge a path between two cities. Then, the first node can be any city 
-(since one can start from any city of the optimal path without changing the path distance), and 
-the path from the origin node to a leaf in the graph should represent the total 
-length of that path.
+To overcome this limitation, the \textit{Branch and Bound} technique provides a more efficient alternative. Instead of exploring all possible permutations, it divides the problem into smaller subproblems and makes informed decisions to discard some of these subproblems, effectively pruning the "search space".
 
-However, simply storing the entire tree will evidently yield an enormous amount 
-of data, as all possible combinations would end up stored in memory. That is why the 
-branch and bound technique must make the decision of which city to visit next based 
-on all of the previous decisions, which can be called a \textbf{lower bound}.
+Simply storing all paths would evidently yield a lot of data, as all possible combinations would end up stored in memory. That is why the algorithm must make smart decisions when choosing which city to visit next, which is called a \textbf{lower bound}.
 
-The lower bound parameter for selecting the next city is calculated by summing the 
-distance of the current path with the minimum distance to any unvisited city. By 
-maintaining this metric for each partial path, the branch and bound algorithm 
-discards subproblems that cannot possibly lead to the optimal solution, effectively 
-focusing on the most promising paths.
+This lower bound parameter is calculated by summing the total distance of the previously calculated partial paths and checking which new path to unvisited cities would be the shortest. By maintaining this metric, the \textit{Branch and Bound} algorithm can discard subproblems that will not lead to the optimal solution, and focus on the most promising paths.
 
 Additionally, there can be made a choice of which method to traverse the "space" of 
 possibilities: \textbf{best-first-search} or \textbf{depth-first-search}. The \textit{best} 
@@ -104,7 +92,7 @@ but will require a more memory. And secondly, the \textit{depth} variety of trav
 standart search that goes deeper in the tree, which will require less space but may spend more 
 time traversing the branches. As this is an expensive approach, the DFS was chosen.
 
-The branch-and-bound technique has a \textbf{Worst-case} time complexity of $O(n!)$, 
+The \textit{Branch and Bound} technique has a \textbf{worst-case} time complexity of $O(n!)$, 
 where $n$ is the number of cities, because it may need to explore all possible permutations. 
 However, effective bounding can significantly reduce the number of examined permutations, 
 making it more efficient than a naive brute-force approach. The actual performance depends on 
