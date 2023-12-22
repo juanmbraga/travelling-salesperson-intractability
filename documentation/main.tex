@@ -188,59 +188,58 @@ on the dataset and libraries used).
 
 \subsection{Memory Use} \label{sec:exp_memory}
 
-The first and most important aspect when dealing with exponential optimisation algorithms such as 
+The first and most important aspect when dealing with exponential optimisation problems such as 
 the TSP is the use of memory. To make informed decisions about all possible combinations, 
 it is often necessary to store information about many or all of the previous decisions, not to 
 mention storing the entire problem.
 
-For this project, the chosen data structure implementation (See Section~\ref{sec:implementation}) works by storing 
+For this project, the chosen data structure implementation (Section~\ref{sec:implementation}) works by storing 
 the entire graph in memory, so simply storing the dataset is the first memory bottleneck.
 
-For the algorithms themselves, see the allocated memory for each test case in Figure~\ref{fig:mem_use}.
+For the algorithms themselves, see the maximum allocated memory for each test case in Figure~\ref{fig:mem_use}.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[height=.325\textheight]{images/memory_use_comparison.png}
-\caption{Chart comparing the allocated memory between the \textit{Christofides} and the \textit{Twice Around the Tree} algorithms.}
+\caption{Comparison of the maximum allocated memory by the \textit{Christofides} and the \textit{Twice Around the Tree} algorithms.}
 \label{fig:mem_use}
 \end{figure}
 
-The graph displays a similar memory footprint for both algorithms. However, to put things in perspective, 
-we should take a loot at Figure~\ref{fig:memory_behaviour}.
+This first graph displays a similar memory footprint for both algorithms. However, to put things in perspective, 
+we should take a look at Figure~\ref{fig:memory_behaviour}.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{images/memory_profile_comparison.png}
-\caption{(a) Graph showing memory use for the \textit{Twice Around the Tree} algorithm. (b) Graph showing memory use for the \textit{Christofides} algorithm.}
+\caption{(a) Memory footprint of the system during the execution of the \textit{Twice Around the Tree} algorithm on problems with increasing size. (b) Memory footprint for both \textit{Christofides} and \textit{Twice Around the Tree} algorithms, for the same instance.}
 \label{fig:memory_behaviour}
 \end{figure}
 
 The first thing that must be noted it that for each algorithm there was a dataset where the allocated memory surpassed 
-the available RAM capacity (See Section~\ref{sec:implementation} for computer specifications) and storage in the \texttt{swap}\footnotemark file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the \textit{Twice Around the Tree}, 
+the available RAM capacity, and storage in the \texttt{swap}\footnotemark file was triggered. This can be seen starting from the the dataset \texttt{rl5915} execution with the \textit{Twice Around the Tree}, 
 in Figure~\ref{fig:memory_behaviour} (a). This behaviour is similar in the \textit{Christofides} algorithm.
 
 \footnotetext{Swap or Page file is a section of a hard drive used as a temporary location to store information 
 when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
-compared with the primary memory.}
+compared to the RAM.}
 
 Secondly, from the \texttt{rl11849} dataset onward the computer did not have enough memory and swap to 
-even build the graph in the executions without memory monitoring (See Figure~\ref{fig:memory_behaviour} 
+even build the graph in the executions (See Figure~\ref{fig:memory_behaviour} 
 (a)), causing the computer to crash\footnotemark. 
-As the use of the \textit{memory\_profiler} gives us a significantly larger memory footprint, executing the smaller 
-\texttt{rl5915} and \texttt{rl5934} datasets with it was also not possible.
+(As the use of the \textit{memory\_profiler} gives us a significantly larger memory footprint, executing the smaller 
+\texttt{rl5915} and \texttt{rl5934} datasets with it was also not possible.)
 
 \footnotetext{Even though the computer crashed when reaching maximum RAM + swap usage, the student noticed that running 
-in Microsoft Windows instead of Ubuntu in such circumstances did not cause a crash. Unfortunately, the available 
-machine with Windows was underpowered and would take much longer.}
+the same instances in Microsoft Windows did not cause a crash. Sadly, the available Windows machine was underpowered and so this option was ignored.}
 
-The Figure~\ref{fig:memory_behaviour} (b) displays how the memory footprint for both algorithms is quite similar 
-(using a small dataset to fit the execution of the \textit{Christofides} algorithm).
+The Figure~\ref{fig:memory_behaviour} (b) also corroborates the idea of how their memory footprint is similar 
+(using a small dataset to fit the execution time of the \textit{Christofides} algorithm).
 
-The student was not able to implement a useful \textit{Branch and Bound} solution to compare with the approximations. 
-Every attempt, either in python or C++, has caused an explosive use of memory, crashing the computer 
+Lastly, the student was not able to implement a useful \textit{Branch and Bound} solution to compare with the approximations. 
+Every attempt, either in Python or C++, has caused an explosive use of memory, crashing the computer 
 even for the smallest dataset. The student is forced to conclude that trying to solve this problem with this 
 approach is not practical in the absolute sense, although there may be trickier and more efficient ways of 
-implementing. He is, however, assured that choosing the \textit{Depth-First-Search} was the right intuition.
+implementing a somewhat-viable solution. He is, however, assured that choosing the \textit{Depth-First-Search} was the right intuition.
 
 \subsection{Solution Quality} \label{sec:exp_quality}
 
@@ -268,12 +267,11 @@ The execution time of the algorithms can be compared with the following Figure~\
 \label{fig:exec_time}
 \end{figure}
 
-The \textit{Christofides} algorithm takes significantly longer to run when compared to the \textit{Twice Around the Tree}. 
-In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
-has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}). 
-This fact can explain why the \texttt{fnl4461} has shown such a drastic increase in execution time: the use 
+The \textit{Christofides} algorithm takes significantly longer to run when compared to the \textit{Twice Around the Tree} algorithm. 
+In fact, it appears to form an exponential growth. However, as diagnosed in Section~\ref{sec:exp_memory}, the algorithms exceeded the available RAM memory, so this claim must be put into perspective.
+This fact can explain why the \texttt{fnl4461} case has shown such a drastic increase in execution time: the use 
 of swap memory has slowed it down, and from this point onward the graph will not display its ideal behaviour. In 
-other words, this does not constitute as evidence that \textit{Christofides} algorithm is exponential 
+other words, this does not constitute as evidence that the \textit{Christofides} algorithm is exponential 
 (See Section~\ref{sec:chris_explanation}).
 
 This perfectly illustrates how difficult of a problem it is to optimise exponential algorithms, even for relatively 
