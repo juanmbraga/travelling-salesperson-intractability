@@ -74,7 +74,7 @@ from \textbf{picturing the problem as a tree}, especially in the Section~\ref{se
 In this project, three algorithms were implemented: an optimal solution using the \textit{Branch and Bound} technique, and two approximations, the \textit{Twice Around the Tree} and the 
 \textit{Christofides} algorithms.
 
-\subsection{Optimal Solution} \label{sec:optimal_explanation}
+\subsection{Optimal Solution: Branch and Bound} \label{sec:optimal_explanation}
 
 As a hard problem, the most straightforward approach is the \textit{brute force} method, which involves generating all possible permutations of the cities and calculating the total distance for each permutation. However, evaluating the permutations quickly becomes impractical as the number of cities increases, and this may just be the only way to look for the optimal solution on similar problems.
 
@@ -169,7 +169,7 @@ two executions: one for testing time and performance and another to keep track o
 \textbf{Execution Instructions:}
 
 \begin{itemize}
-  \item Make sure that a compatible Python version and the libraries used (See above) are installed.
+  \item Make sure that a compatible Python version and the libraries used (see above) are installed.
   \item Select the desired datasets to be used in the \texttt{dataset\_schema.txt} file.
   \item Make sure the respective dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
   \item Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file.
@@ -198,7 +198,7 @@ For the algorithms themselves, see the allocated memory for each test case in Fi
 
 \begin{figure}[ht]
 \centering
-\includegraphics[height=.325\textheight]{memory_use_comparison.png}
+\includegraphics[height=.325\textheight]{images/memory_use_comparison.png}
 \caption{Chart comparing the allocated memory between the \textit{Christofides} and the \textit{Twice Around the Tree} algorithms.}
 \label{fig:mem_use}
 \end{figure}
@@ -208,7 +208,7 @@ we will analyse the Figure~\ref{fig:memory_behaviour}.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{memory_profile_comparison.png}
+\includegraphics[width=\textwidth]{images/memory_profile_comparison.png}
 \caption{(a) Graph showing memory use for the \textit{Twice Around the Tree} algorithm. (b) Graph showing memory use for the \textit{Christofides} algorithm.}
 \label{fig:memory_behaviour}
 \end{figure}
@@ -247,7 +247,7 @@ The graph of the Figure~\ref{fig:quality_ratio} shows the ratio $\frac{Approxima
 
 \begin{figure}[ht]
 \centering
-\includegraphics[height=.325\textheight]{quality_ratio.png}
+\includegraphics[height=.325\textheight]{images/quality_ratio.png}
 \caption{Chart comparing the quality of the approximate and optimal solutions.}
 \label{fig:quality_ratio}
 \end{figure}
@@ -262,7 +262,7 @@ The execution time of the algorithms can be compared with the following Figure~\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[height=.325\textheight]{execution_time_comparison.png}
+\includegraphics[height=.325\textheight]{images/execution_time_comparison.png}
 \caption{Chart comparing the time elapsed between the \textit{Christofides} and the \textit{Twice Around the Tree} algorithms.}
 \label{fig:exec_time}
 \end{figure}
