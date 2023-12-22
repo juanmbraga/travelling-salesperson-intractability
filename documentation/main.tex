@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
-
+\usepackage{amsmath}
 \usepackage{graphicx,url}
 
 %\usepackage[brazil]{babel}   
@@ -129,20 +129,20 @@ matching on the odd-degree vertices remains the bottleneck of the algorithm.
 
 \subsection{Approximate Solution: Twice Around the Tree} \label{sec:twice_explanation}
 
-The Twice-around-the-tree also uses the MST to generate a solution. The idea is to generate a path by 
+The \textit{Twice Around the Tree} also uses the MST to generate a solution. The idea is to generate a path by 
 traversing this MST twice, once in each direction (which means cities are allowed to be visited 
 more than once). This can be done by a Depth-First Search (DFS) traversal.
 
-To improve the quality of the solution, the TAT algorithm then tries to shortcut the 
+To improve the quality of the solution, the algorithm then tries to shortcut the 
 path by adding extra edges to it. These edges are chosen in such a way as to reduce 
 the overall path length. The algorithm continues to add edges until the path length 
 does not change significantly.
 
 This algorithm has a \textbf{worst-case} guarantee of 2 (also called \textit{2-approximate}), meaning 
-that the total cost of the path found is at most twice the cost of the MST.
+that the total cost of the path found is at most twice the cost of the optimal solution.
 
 One can implement an optimisation and reach an algorithm similar to the \textit{Approx-TSP-Tour} 
-described by \cite{cormen}, and this approach has polynomial time: its complexity is $number\_of\_cities^2$.
+described by \cite{cormen}, and this approach has polynomial time: its complexity is $(number\_of\_cities)^2$.
 
 \section{Implementation Choices and Execution Instructions} \label{sec:implementation}
 
