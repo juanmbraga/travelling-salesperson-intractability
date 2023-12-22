@@ -69,10 +69,12 @@ analysing the usage of computer resources.
 
 The TSP problem can be conveniently modelled by a weighted graph, with the graph's 
 nodes representing the cities and the edge weights specifying the distances. One benefits 
-from \textbf{picturing the problem as a tree}, especially in the Section~\ref{sec:algorithms}.
+from \textbf{picturing the problem as a tree}, especially in Section~\ref{sec:optimal_explanation}.
 
 In this project, three algorithms were implemented: an optimal solution using the \textit{Branch and Bound} technique, and two approximations, the \textit{Twice Around the Tree} and the 
 \textit{Christofides} algorithms.
+
+It must be noted that the approximation algorithms rely on the assumption that the instances of the problem obey the \textbf{triangle inequality}: in simple terms it says that no single side of a triangle can be greater than the sum of the two others (which is reasonable for most real-world applications).
 
 \subsection{Optimal Solution: Branch and Bound} \label{sec:optimal_explanation}
 
@@ -144,16 +146,16 @@ that the total cost of the path found is at most twice the cost of the optimal s
 One can implement an optimisation and reach an algorithm similar to the \textit{Approx-TSP-Tour} 
 described by \cite{cormen}, and this approach has polynomial time: its complexity is $(number\_of\_cities)^2$.
 
-\section{Implementation Choices and Execution Instructions} \label{sec:implementation}
+\section{Implementation Choices, Dataset and Execution Instructions} \label{sec:implementation}
 
 The programming language used was Python 3.12, and the program was executed 
 in a Python Virtual Environment on the Ubuntu 23.10 Linux distribution, on a computer with a 
 Intel Core i5-4690K processor and 8GB of RAM at 2133MHz.
 
-The \textbf{datasets} were selected by the professor from the TSPLIB \cite{dataset_lib}. They are 
-composed of \texttt{.tsp} files with the node key and its $x$ and $y$ location in the cartesian plane. 
+The \textbf{datasets} were selected by the professor from the TSPLIB 95 \cite{dataset_lib}. They are composed of a sequence of 78 instances that gradually increase the number of nodes/cities, from 52 and up to 18512. They are 
+stored in \texttt{.tsp} files with the node key and its $x$ and $y$ location in the cartesian plane. 
 The graphs are to be constructed by considering that all cities are connected to all other cities, forming 
-a totally connected graph.
+a totally connected graph. All instances are considered to respect the \texttt{triangle inequality} rule (see Section~\ref{sec:algorithms} for more information).
 
 The chosen \textbf{data structure} for the approximate algorithms was the graph implementation 
 by the \texttt{networkx} library in python \cite{networkx_docs}, as recommended by 
@@ -161,10 +163,10 @@ the professor in the project specifications. To prevent excessive use of Python 
 the internal \texttt{networkx} functions were also used, such as \texttt{minimum\_spanning\_tree}, 
 \texttt{eulerian\_circuit} and \texttt{min\_weight\_matching}.
 
-The \textbf{libraries} \texttt{time} and \texttt{memory\_profiler} were chosen to keep track of time 
-and allocated memory, as they provided the most convenient interface. It must be noted that the library 
-to monitor the memory gives a significant increase in memory use, so the implementation allowed for 
-two executions: one for testing time and performance and another to keep track of the memory.
+The \textbf{libraries} \texttt{time} and \texttt{memory\_profiler}\footnotemark were chosen to keep track of time 
+and allocated memory, as they provided the most convenient interface. As mentioned before, the \texttt{networkx} library was also used. 
+
+\footnotetext{The library to monitor memory significantly increases memory use, so the program can be run to just keep track of memory and also to collect just the other metrics.}
 
 \textbf{Execution Instructions:}
 
@@ -172,9 +174,9 @@ two executions: one for testing time and performance and another to keep track o
   \item Make sure that a compatible Python version and the libraries used (see above) are installed.
   \item Select the desired datasets to be used in the \texttt{dataset\_schema.txt} file.
   \item Make sure the respective dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
-  \item Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file.
+  \item Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file. (Look for the \texttt{run\_algorithm\_name} boolean variables in the \texttt{main} function.)
   \item Run the code in a terminal with the following command: \texttt{python main.py} or \texttt{python3 main.py}.
-  \item The results will be located on a file called \texttt{statistics.csv}.
+  \item The results should be located on a file called \texttt{statistics.csv} in the main folder.
 \end{itemize}
 
 \section{Experiments} \label{sec:experiments}
@@ -182,7 +184,7 @@ two executions: one for testing time and performance and another to keep track o
 The qualities of each algorithm will be evaluated through four metrics: the time elapsed 
 to find the solution, the amount of memory used and the quality of the solutions found 
 compared to the optimal solution (see Section~\ref{sec:implementation} for information 
-on libraries used).
+on the dataset and libraries used).
 
 \subsection{Memory Use} \label{sec:exp_memory}
 
@@ -204,7 +206,7 @@ For the algorithms themselves, see the allocated memory for each test case in Fi
 \end{figure}
 
 The graph displays a similar memory footprint for both algorithms. However, to put things in perspective, 
-we will analyse the Figure~\ref{fig:memory_behaviour}.
+we should take a loot at Figure~\ref{fig:memory_behaviour}.
 
 \begin{figure}[ht]
 \centering
@@ -214,8 +216,7 @@ we will analyse the Figure~\ref{fig:memory_behaviour}.
 \end{figure}
 
 The first thing that must be noted it that for each algorithm there was a dataset where the allocated memory surpassed 
-the available RAM capacity (See Section~\ref{sec:implementation} for computer specifications) and storage in the \texttt{swap}
-\footnotemark file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the \textit{Twice Around the Tree}, 
+the available RAM capacity (See Section~\ref{sec:implementation} for computer specifications) and storage in the \texttt{swap}\footnotemark file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the \textit{Twice Around the Tree}, 
 in Figure~\ref{fig:memory_behaviour} (a). This behaviour is similar in the \textit{Christofides} algorithm.
 
 \footnotetext{Swap or Page file is a section of a hard drive used as a temporary location to store information 
@@ -225,7 +226,7 @@ compared with the primary memory.}
 Secondly, from the \texttt{rl11849} dataset onward the computer did not have enough memory and swap to 
 even build the graph in the executions without memory monitoring (See Figure~\ref{fig:memory_behaviour} 
 (a)), causing the computer to crash\footnotemark. 
-As the use of the memory\_profiler gives us a significantly larger memory footprint, executing the smaller 
+As the use of the \textit{memory\_profiler} gives us a significantly larger memory footprint, executing the smaller 
 \texttt{rl5915} and \texttt{rl5934} datasets with it was also not possible.
 
 \footnotetext{Even though the computer crashed when reaching maximum RAM + swap usage, the student noticed that running 
