@@ -158,7 +158,7 @@ a totally connected graph.
 The chosen \textbf{data structure} for the approximate algorithms was the graph implementation 
 by the \texttt{networkx} library in python \cite{networkx_docs}, as recommended by 
 the professor in the project specifications. To prevent excessive use of Python loops, 
-the internal \texttt{networkx} functions were also used, such as \texttt{minimum\_spanning\_tree} , 
+the internal \texttt{networkx} functions were also used, such as \texttt{minimum\_spanning\_tree}, 
 \texttt{eulerian\_circuit} and \texttt{min\_weight\_matching}.
 
 The \textbf{libraries} \texttt{time} and \texttt{memory\_profiler} were chosen to keep track of time 
@@ -167,6 +167,7 @@ to monitor the memory gives a significant increase in memory use, so the impleme
 two executions: one for testing time and performance and another to keep track of the memory.
 
 \textbf{Execution Instructions:}
+
 \begin{itemize}
   \item Make sure that a compatible Python version and the libraries used (See above) are installed.
   \item Select the desired datasets to be used in the \texttt{dataset\_schema.txt} file.
@@ -198,7 +199,7 @@ For the algorithms themselves, see the allocated memory for each test case in Fi
 \begin{figure}[ht]
 \centering
 \includegraphics[height=.325\textheight]{memory_use_comparison.png}
-\caption{Chart comparing the allocated memory between the Christofides and the Twice-around-the-tree algorithms.}
+\caption{Chart comparing the allocated memory between the \textit{Christofides} and the \textit{Twice Around the Tree} algorithms.}
 \label{fig:mem_use}
 \end{figure}
 
@@ -208,14 +209,14 @@ we will analyse the Figure~\ref{fig:memory_behaviour}.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{memory_profile_comparison.png}
-\caption{(a) Graph showing memory use for the Twice-around-the-tree algorithm. (b) Graph showing memory use for the Christofides algorithm.}
+\caption{(a) Graph showing memory use for the \textit{Twice Around the Tree} algorithm. (b) Graph showing memory use for the \textit{Christofides} algorithm.}
 \label{fig:memory_behaviour}
 \end{figure}
 
 The first thing that must be noted it that for each algorithm there was a dataset where the allocated memory surpassed 
 the available RAM capacity (See Section~\ref{sec:implementation} for computer specifications) and storage in the \texttt{swap}
-\footnotemark file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the Twice-around-the-tree, 
-in Figure~\ref{fig:memory_behaviour} (a). This behaviour is similar in the Christofides algorithm.
+\footnotemark file was triggered. This can be seen in the dataset \texttt{rl5915} execution with the \textit{Twice Around the Tree}, 
+in Figure~\ref{fig:memory_behaviour} (a). This behaviour is similar in the \textit{Christofides} algorithm.
 
 \footnotetext{Swap or Page file is a section of a hard drive used as a temporary location to store information 
 when the computer's RAM (random-access memory) is fully utilized. It has significantly slower speeds when 
@@ -232,9 +233,9 @@ in Microsoft Windows instead of Ubuntu in such circumstances did not cause a cra
 machine with Windows was underpowered and would take much longer.}
 
 The Figure~\ref{fig:memory_behaviour} (b) displays how the memory footprint for both algorithms is quite similar 
-(using a small dataset to fit the execution of the Christofides algorithm).
+(using a small dataset to fit the execution of the \textit{Christofides} algorithm).
 
-The student was not able to implement a useful branch-and-bound solution to compare with the approximations. 
+The student was not able to implement a useful \textit{Branch and Bound} solution to compare with the approximations. 
 Every attempt, either in python or C++, has caused an explosive use of memory, crashing the computer 
 even for the smallest dataset. The student is forced to conclude that trying to solve this problem with this 
 approach is not practical in the absolute sense, although there may be trickier and more efficient ways of 
@@ -251,8 +252,8 @@ The graph of the Figure~\ref{fig:quality_ratio} shows the ratio $\frac{Approxima
 \label{fig:quality_ratio}
 \end{figure}
 
-The Twice-around-the-tree stays consistently below the expected theoretical worst case (Section~\ref{sec:twice_explanation}) of 
-twice the optimal solution, and the Christofides solutions find paths that are consistently better and closer to it, 
+The \textit{Twice Around the Tree} stays consistently below the expected theoretical worst case (Section~\ref{sec:twice_explanation}) of 
+twice the optimal solution, and the \textit{Christofides} solutions find paths that are consistently better and closer to it, 
 also keeping the tight 1.5 quality ratio specified in Section~\ref{sec:chris_explanation}.
 
 \subsection{Execution Time} \label{sec:exp_time}
@@ -262,36 +263,36 @@ The execution time of the algorithms can be compared with the following Figure~\
 \begin{figure}[ht]
 \centering
 \includegraphics[height=.325\textheight]{execution_time_comparison.png}
-\caption{Chart comparing the time elapsed between the Christofides and the Twice-around-the-tree algorithms.}
+\caption{Chart comparing the time elapsed between the \textit{Christofides} and the \textit{Twice Around the Tree} algorithms.}
 \label{fig:exec_time}
 \end{figure}
 
-The Christofides algorithm takes significantly longer to run when compared to the Twice-around-the-tree. 
+The \textit{Christofides} algorithm takes significantly longer to run when compared to the \textit{Twice Around the Tree}. 
 In fact, it appears to form an exponential growth, but that must be put into perspective as the student 
 has diagnosed that the algorithms exceeded the available RAM memory (See Section~\ref{sec:exp_memory}). 
 This fact can explain why the \texttt{fnl4461} has shown such a drastic increase in execution time: the use 
 of swap memory has slowed it down, and from this point onward the graph will not display its ideal behaviour. In 
-other words, this does not constitute as evidence that Christofides algorithm is exponential 
+other words, this does not constitute as evidence that \textit{Christofides} algorithm is exponential 
 (See Section~\ref{sec:chris_explanation}).
 
 This perfectly illustrates how difficult of a problem it is to optimise exponential algorithms, even for relatively 
-small cases. The Twice-around-the-tree, although having a much worse quality then the Christofides, is 
+small cases. The \textit{Twice Around the Tree}, although having a much worse quality then the \textit{Christofides}, is 
 significantly faster and should provide good-enough answers for the right situations.
 
 \section{Conclusions} \label{sec:conclusions}
 
 Implementing the algorithms provided valuable insights into the real-world aspects of solving the TSP. 
 It demonstrated the trade-offs between solution quality, execution time, and memory requirements, 
-and highlighted the limitations of exponential algorithms, as the branch-and-bound technique can 
+and highlighted the limitations of exponential algorithms, as the \textit{Branch and Bound} technique can 
 quickly become intractable for even relatively small instances of the problem.
 
-For the approximations, the Cristofides algorithm consistently outperforms the twice-around-the-tree 
+For the approximations, the Cristofides algorithm consistently outperforms the \textit{Twice Around the Tree} 
 algorithm in terms of solution quality, maintaining a tight 1.5 quality ratio with the optimal 
-solution. However, it is significantly slower. The twice-around-the-tree algorithm, on the other hand, 
+solution. However, it is significantly slower. The \textit{Twice Around the Tree} algorithm, on the other hand, 
 offers a reasonable trade-off between solution quality and execution time.
 
-The results suggest that the twice-around-the-tree algorithm is a good choice for practical applications of the 
-TSP, as it provides a reasonable balance between quality and efficiency. The Christofides algorithm can be used 
+The results suggest that the \textit{Twice Around the Tree} algorithm is a good choice for practical applications of the 
+TSP, as it provides a reasonable balance between quality and efficiency. The \textit{Christofides} algorithm can be used 
 when a high-quality solution is required, but it is important to be aware of its computational limitations.
 
 \bibliographystyle{sbc}
