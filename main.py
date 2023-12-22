@@ -5,7 +5,7 @@ import networkx as nx
 from algorithms.twice_around_the_tree import solve as twice_around_the_tree
 from algorithms.christofides import solve as christofides
 from algorithms.branch_and_bound import solve as branch_and_bound
-import preprocessor
+import algorithms.preprocessor as preprocessor
 from memory_profiler import memory_usage
 from functools import partial
 
@@ -28,7 +28,7 @@ def main():
     statistics_file = 'statistics.csv'
 
     run_twice_around_the_tree = True 
-    run_christofides = True
+    run_christofides = False
     run_branch_and_bound = False
 
     skip_memory_monitoring = False
