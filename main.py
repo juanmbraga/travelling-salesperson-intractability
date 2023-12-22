@@ -24,7 +24,7 @@ def measure_memory_usage(func, *args, **kwargs):
 
 def main():
     datasets = []
-    datasets_file = 'dataset_schema.txt'
+    datasets_file = 'dataset_recipe.txt'
     statistics_file = 'statistics.csv'
 
     run_twice_around_the_tree = True 
