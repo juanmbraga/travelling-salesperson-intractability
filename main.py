@@ -22,10 +22,16 @@ def measure_memory_usage(func, *args, **kwargs):
     max_mem_usage = max(mem_usage)
     return max_mem_usage
 
+def timestamp():
+    current_time = time.time()
+    time_struct = time.localtime(current_time)
+    formatted_time = time.strftime("%Y%m%d%H%M%S", time_struct)
+    return formatted_time
+
 def main():
     datasets = []
     datasets_file = 'dataset_recipe.txt'
-    statistics_file = 'statistics.csv'
+    statistics_file = 'statistics/' + 'results_' + timestamp() + '.csv'
 
     run_twice_around_the_tree = True 
     run_christofides = False
