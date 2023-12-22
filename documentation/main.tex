@@ -100,28 +100,30 @@ the specific instance of the problem and the bounding technique used.
 
 \subsection{Approximate Solution: Christofides} \label{sec:chris_explanation}
 
-The Christofides algorithm was built by leveraging a key insight: many of the edges on the 
+The \textit{Christofides} algorithm was built by leveraging a key insight: many of the edges on the 
 optimal solution are often found on the Minimum Spanning Tree (MST) of the same graph 
 \footnote{\cite{reducible_explanation}}. Therefore, as there are known relatively efficient 
-algorithms for generating the MST, it makes sense to try and make use of this fact.
+algorithms for generating the MST (such as \textit{Prim's} and \textit{Kruskal's} algorithms, presented previously during DCC206 classes), it makes sense to try and make use of this fact.
 
 To form an optimal solution, all nodes of the MST should have an even number of edges, so 
 that the salesperson could enter and leave the city through exactly two edges (also known as an 
 \textit{Eulerian Tour}). However, most MSTs have nodes with an odd number of edges, 
 which will require more edges to be added.
 
-The second part of the solution involves finding good edge candidates to append to te odd 
-edges. Out of multiple available options, the approach used in this implementation was the minimmn-length
-matching of the odd-degree nodes, which tries to find a maximum matching in a bipartite 
-graph with minimum total weight. In other words, it tries to find the best nodes (shortest distance) 
+The second part of the solution involves finding good edge candidates to append to these odd 
+edges from the MST. Out of multiple available options, the approach used in this implementation was the minimmn-length
+matching of the odd-degree nodes, which tries to find a maximum matching in a \textit{bipartite 
+graph}\footnotemark with minimum total weight. In other words, it tries to find the best nodes (shortest distance) 
 that connect every pair of the odd-degree nodes of the MST.
+
+\footnotetext{A graph is bipartite if its vertices can be divided into two groups such that no two edges connect vertices from the same group.}
 
 Combining the MST with the minimum-length matching will provide us with a very good 
 approximation of the TSP's optimal solution, which can be easily constructed by
 traversing this graph while taking shortcuts to avoid visiting multiple cities.
 
-According to \cite{Johnson2003}, the Christofides algorithm provides a better 
-\textbf{worst-case} guarantee than any other currently known tour construction heuristic: a worst case ratio of 1.5; 
+According to \cite{Johnson2003}, the \textit{Christofides} algorithm provides a better 
+\textbf{worst-case} guarantee than any other currently known tour construction heuristic: a worst case ratio of 1.5, which means that the total cost of the path found is at most twice the cost of the optimal solution; 
 [and] it also tends to find better tours in practice. However, computing the minimum-length 
 matching on the odd-degree vertices remains the bottleneck of the algorithm.
 
