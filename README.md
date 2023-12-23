@@ -17,10 +17,10 @@ The TSP is a well-known `intractable problem`, which in the context of algorithm
 *A salesperson needs to visit a set of cities to sell their goods. They know how many cities they need to go to and the distances between each city. In what order should the salesperson visit each city exactly once so that they minimize their travel time and so that they end their journey in their city of origin?*
 
 # File structure and execution instructions
-- `algorithms/` folder is where the Python implementation of each algorithm can be found.
-- `datasets/` folder is where the datasets, as `.tsp` files, are located.
-- `documentation/` foldere is where the *LateX* files and images for the documentation are stored.
-- `statistics/` is the folder where the results will be stored in `.csv` format.
+- **algorithms/** folder is where the Python implementation of each algorithm can be found.
+- **datasets/** folder is where the datasets, as **.tsp** files, are located.
+- **documentation/** foldere is where the *LateX* files and images for the documentation are stored.
+- **statistics/** is the folder where the results will be stored in **.csv** format.
 - **`main.py`** is the main file that will run all of the algorithms and generate the results.
 - **`dataset_recipe.txt`** is the file that specifies the datasets that will be used and in which order.
 - **`documentation.pdf`** is a pdf article where all of the descriptions, choices, results and analysis can be found.
