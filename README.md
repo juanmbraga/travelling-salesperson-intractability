@@ -19,7 +19,7 @@ The TSP is a well-known `intractable problem`, which in the context of algorithm
 # File structure and execution instructions
 
 **The files you should pay the most attention to are**:
-- **`documentation.pdf`** is a pdf article where all of the descriptions, choices, results and analysis can be found.
+- **`documentation.pdf`** is the article where all of the descriptions, choices, results and analysis can be found.
 - **`main.py`** is the main file that will run all of the algorithms and generate the results.
 
 The remaining files and folders are implementation-specific:
@@ -30,8 +30,8 @@ The remaining files and folders are implementation-specific:
 - **`dataset_recipe.txt`** is the file that specifies the datasets that will be used and in which order.
 
 
-**To run the project**, make sure to have installed all of the packages specified in Section 3 of the documentation file. Then, simply run `main.py` with Python 3.
-
+### To run the project
+Make sure to have installed all of the packages specified in Section 3 of the documentation file. Then, simply run `main.py` with Python 3.
 
 ---
 **Students:**
