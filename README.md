@@ -25,8 +25,6 @@ The TSP is a well-known `intractable problem`, which in the context of algorithm
 - **`dataset_recipe.txt`** is the file that specifies the datasets that will be used and in which order.
 - **`documentation.pdf`** is a pdf article where all of the descriptions, choices, results and analysis can be found.
 
-make sure to have all of the packages specified in Section 3 of the documentation file.
-
 **To run the project**, make sure to have all of the packages specified in Section 3 of the documentation file. Then simply run `main.py` with Python 3.
 
 
