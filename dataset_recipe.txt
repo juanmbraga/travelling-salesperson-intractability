@@ -1,4 +1,4 @@
-Dataset	Nodes Optimal
+Dataset_name	Number_of_Nodes Optimal_Solution
 eil51	51	426
 berlin52	52	7542
 st70	70	675

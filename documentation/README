@@ -1,0 +1,6 @@
+# Documentation
+This folder contains the documentation files in LateX for the project.
+
+You may find the compiled PDF in the root folder of the project.
+
+The most important files are: `main.tex` has most of the writing and `sbc-template.bib` has the references.

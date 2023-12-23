@@ -1,6 +1,5 @@
 import networkx as nx
 
-
 def solve(graph):
     """
     Solves the Travelling Salesperson Problem using the Twice Around the Tree algorithm.

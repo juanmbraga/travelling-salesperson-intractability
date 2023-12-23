@@ -1,0 +1,5 @@
+# Datasets
+This is the folder where the the datasets are located. 
+- They should have a `.tsp` extension.
+- Make sure to follow the formatting of the files in this folder when creating new datasets.
+- Remember to add the name of your dataset to `dataset_recipe.txt` (in the root folder) so that it will be used by the algorithms.

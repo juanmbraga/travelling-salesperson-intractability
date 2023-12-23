@@ -9,6 +9,16 @@ def distance(coord1, coord2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
 def generate_graph(file_name):
+    """
+    Generates a graph from a TSP file.
+
+    Parameters:
+    file_name (str): The name of the TSP file (without the extension).
+
+    Returns:
+    networkx.Graph: The generated graph.
+    """
+
     # Construct the file path
     file_path = os.path.join("datasets", file_name + ".tsp")
 

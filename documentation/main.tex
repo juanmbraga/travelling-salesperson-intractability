@@ -104,8 +104,10 @@ the specific instance of the problem and the bounding technique used.
 
 The \textit{Christofides} algorithm was built by leveraging a key insight: many of the edges on the 
 optimal solution are often found on the Minimum Spanning Tree (MST) of the same graph 
-\footnote{\cite{reducible_explanation}}. Therefore, as there are known relatively efficient 
-algorithms for generating the MST (such as \textit{Prim's} and \textit{Kruskal's} algorithms, presented previously during DCC206 classes), it makes sense to try and make use of this fact.
+\footnote{See \cite{reducible_explanation} for an intuitive and visual explanation.}. 
+Therefore, as there are known relatively efficient algorithms for generating the MST 
+(such as \textit{Prim's} and \textit{Kruskal's} algorithms, presented previously during DCC206 classes), 
+it makes sense to try and make use of this fact.
 
 To form an optimal solution, all nodes of the MST should have an even number of edges, so 
 that the salesperson could enter and leave the city through exactly two edges (also known as an 
@@ -176,7 +178,7 @@ and allocated memory, as they provided the most convenient interface. As mention
   \item Make sure the respective dataset \texttt{.tsp} files are in the \texttt{datasets/} subfolder.
   \item Choose which algorithm will be run and wether to skip memory monitoring in the \texttt{main.py} file. (Look for the \texttt{run\_algorithm\_name} boolean variables in the \texttt{main} function.)
   \item Run the code in a terminal with the following command: \texttt{python main.py} or \texttt{python3 main.py}.
-  \item The results are stored as a \texttt{.csv} file within the subfolder \texttt{statistics}, named "results" and followed by a timestamp.
+  \item The results are stored as a \texttt{.csv} file within the subfolder \texttt{results}. Each result file will have a timestamp for convenience. 
 \end{itemize}
 
 \section{Experiments and Discussion} \label{sec:experiments}

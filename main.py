@@ -31,10 +31,10 @@ def timestamp():
 def main():
     datasets = []
     datasets_file = 'dataset_recipe.txt'
-    statistics_file = 'statistics/' + 'results_' + timestamp() + '.csv'
+    statistics_file = 'results/' + 'results_' + timestamp() + '.csv'
 
     run_twice_around_the_tree = True 
-    run_christofides = False
+    run_christofides = True
     run_branch_and_bound = False
 
     skip_memory_monitoring = False
